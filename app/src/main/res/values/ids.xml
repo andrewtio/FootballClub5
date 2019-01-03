@@ -8,4 +8,7 @@
     <item name="team_year" type="id"/>
     <item name="team_stadium" type="id"/>
     <item name="team_des" type="id"/>
+    <item name="player_badge" type="id"/>
+    <item name="player_name" type="id"/>
+    <item name="player_position" type="id"/>
 </resources>

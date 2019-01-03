@@ -23,4 +23,15 @@
         <item>Spanish La Liga</item>
     </array>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="chelsea">Chelsea</string>
+    <string name="year">Year</string>
+    <string name="stamford_bridge">Stamford Bridge</string>
+    <string name="description">Description</string>
+    <string name="player_description">Player Description</string>
+    <string name="player_position">Player Position</string>
+    <string name="player_height">Player Height:</string>
+    <string name="player_weight">Player Weight:</string>
+
 </resources>

@@ -45,7 +45,8 @@ class TeamsFragment : Fragment(), AnkoComponent<Context>, TeamsView {
         spinner.adapter = spinnerAdapter
 
         adapter = TeamsAdapter(teams){
-            context?.startActivity<TeamDetailActivity>("id" to "${it.teamId}")
+            context?.startActivity<TeamDetailActivity>("team_data" to it)
+//            context?.startActivity<TeamDetailActivity>("id" to "${it.teamId}")
         }
 
         listTeam.adapter = adapter
@@ -120,6 +121,4 @@ class TeamsFragment : Fragment(), AnkoComponent<Context>, TeamsView {
         teams.addAll(data)
         adapter.notifyDataSetChanged()
     }
-
-
 }
