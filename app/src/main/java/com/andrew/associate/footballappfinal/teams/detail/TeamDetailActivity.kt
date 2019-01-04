@@ -1,19 +1,13 @@
 package com.andrew.associate.footballappfinal.teams.detail
 
 import android.database.sqlite.SQLiteConstraintException
-import android.graphics.Color
 import android.os.Bundle
-import android.support.design.widget.AppBarLayout
-import android.support.design.widget.CoordinatorLayout
-import android.support.design.widget.TabLayout
 import android.support.v4.content.ContextCompat
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.app.AppCompatActivity
-import android.view.Gravity
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.TextView
 import com.andrew.associate.footballappfinal.R
@@ -21,27 +15,16 @@ import com.andrew.associate.footballappfinal.R.drawable.ic_add_to_favorites
 import com.andrew.associate.footballappfinal.R.drawable.ic_added_to_favorites
 import com.andrew.associate.footballappfinal.R.id.add_to_favorite
 import com.andrew.associate.footballappfinal.R.menu.detail_menu
-import com.andrew.associate.footballappfinal.api.ApiRepository
-import com.andrew.associate.footballappfinal.db.Favorite
+import com.andrew.associate.footballappfinal.db.FavoriteTeam
 import com.andrew.associate.footballappfinal.db.database
 import com.andrew.associate.footballappfinal.teams.Team
-import com.andrew.associate.footballappfinal.utils.invisible
-import com.andrew.associate.footballappfinal.utils.visible
-import com.google.gson.Gson
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_detail_team.*
-import org.jetbrains.anko.*
 import org.jetbrains.anko.db.classParser
 import org.jetbrains.anko.db.delete
 import org.jetbrains.anko.db.insert
 import org.jetbrains.anko.db.select
-import org.jetbrains.anko.design.appBarLayout
-import org.jetbrains.anko.design.coordinatorLayout
 import org.jetbrains.anko.design.snackbar
-import org.jetbrains.anko.design.themedTabLayout
-import org.jetbrains.anko.support.v4.onRefresh
-import org.jetbrains.anko.support.v4.swipeRefreshLayout
-import org.jetbrains.anko.support.v4.viewPager
 
 class TeamDetailActivity : AppCompatActivity() {
 
@@ -157,10 +140,10 @@ class TeamDetailActivity : AppCompatActivity() {
 
     private fun favoriteState(){
         database.use {
-            val result = select(Favorite.TABLE_FAVORITE)
+            val result = select(FavoriteTeam.TABLE_FAVORITE)
                 .whereArgs("(TEAM_ID = {id})",
                     "id" to teams.teamId.toString() )
-            val favorite = result.parseList(classParser<Favorite>())
+            val favorite = result.parseList(classParser<FavoriteTeam>())
             if (!favorite.isEmpty()) isFavorite = true
         }
     }
@@ -214,10 +197,10 @@ class TeamDetailActivity : AppCompatActivity() {
     private fun addToFavorite(){
         try {
             database.use {
-                insert(Favorite.TABLE_FAVORITE,
-                    Favorite.TEAM_ID to teams.teamId,
-                    Favorite.TEAM_NAME to teams.teamName,
-                    Favorite.TEAM_BADGE to teams.teamBadge)
+                insert(FavoriteTeam.TABLE_FAVORITE,
+                    FavoriteTeam.TEAM_ID to teams.teamId,
+                    FavoriteTeam.TEAM_NAME to teams.teamName,
+                    FavoriteTeam.TEAM_BADGE to teams.teamBadge)
             }
             swipeRefresh.snackbar("Added to favorite team").show()
         } catch (e: SQLiteConstraintException){
@@ -228,7 +211,7 @@ class TeamDetailActivity : AppCompatActivity() {
     private fun removeFromFavorite(){
         try {
             database.use {
-                delete(Favorite.TABLE_FAVORITE, "(TEAM_ID = {id})",
+                delete(FavoriteTeam.TABLE_FAVORITE, "(TEAM_ID = {id})",
                     "id" to id)
             }
             swipeRefresh.snackbar( "Removed to favorite").show()
@@ -243,5 +226,4 @@ class TeamDetailActivity : AppCompatActivity() {
         else
             menuItem?.getItem(0)?.icon = ContextCompat.getDrawable(this, ic_add_to_favorites)
     }
-
 }

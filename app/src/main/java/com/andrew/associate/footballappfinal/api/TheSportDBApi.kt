@@ -42,4 +42,52 @@ object TheSportDBApi {
             .toString()
     }
 
+    fun getPrevMatch(league: String?): String{
+        return Uri.parse(BuildConfig.BASE_URL).buildUpon()
+            .appendPath("api")
+            .appendPath("v1")
+            .appendPath("json")
+            .appendPath(BuildConfig.TSDB_API_KEY)
+            .appendPath("eventspastleague.php")
+            .appendQueryParameter("id", league)
+            .build()
+            .toString()
+    }
+
+    fun getNextMatch(league: String?): String{
+        return Uri.parse(BuildConfig.BASE_URL).buildUpon()
+            .appendPath("api")
+            .appendPath("v1")
+            .appendPath("json")
+            .appendPath(BuildConfig.TSDB_API_KEY)
+            .appendPath("eventsnextleague.php")
+            .appendQueryParameter("id", league)
+            .build()
+            .toString()
+    }
+
+    fun getMatchDetail(event: String?): String{
+        return Uri.parse(BuildConfig.BASE_URL).buildUpon()
+            .appendPath("api")
+            .appendPath("v1")
+            .appendPath("json")
+            .appendPath(BuildConfig.TSDB_API_KEY)
+            .appendPath("lookupevent.php")
+            .appendQueryParameter("id", event)
+            .build()
+            .toString()
+    }
+
+    fun getTeamImage(imageTeam: String?): String{
+        return Uri.parse(BuildConfig.BASE_URL).buildUpon()
+            .appendPath("api")
+            .appendPath("v1")
+            .appendPath("json")
+            .appendPath(BuildConfig.TSDB_API_KEY)
+            .appendPath("searchteams.php")
+            .appendQueryParameter("t", imageTeam)
+            .build()
+            .toString()
+    }
+
 }

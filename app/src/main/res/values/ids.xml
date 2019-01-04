@@ -11,4 +11,16 @@
     <item name="player_badge" type="id"/>
     <item name="player_name" type="id"/>
     <item name="player_position" type="id"/>
+    <item name="teamdetailviewpager" type="id"/>
+    <item name="match_date" type="id"/>
+    <item name="home_team" type="id"/>
+    <item name="away_team" type="id"/>
+    <item name="home_score" type="id"/>
+    <item name="away_score" type="id"/>
+    <item name="match_time" type="id"/>
+    <item name="list_match" type="id"/>
+    <item name="icon_alarm" type="id"/>
+    <item name="vs" type="id"/>
+    <item name="VS" type="id"/>
+    <item name="notification_alarm" type="id"/>
 </resources>

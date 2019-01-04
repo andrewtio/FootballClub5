@@ -3,14 +3,33 @@ package com.andrew.associate.footballappfinal.home
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import com.andrew.associate.footballappfinal.R
-import com.andrew.associate.footballappfinal.R.id.favorites
-import com.andrew.associate.footballappfinal.R.id.team
+import com.andrew.associate.footballappfinal.R.id.*
 import com.andrew.associate.footballappfinal.R.layout.activity_home
 import com.andrew.associate.footballappfinal.favorites.FavoriteTeamsFragment
+import com.andrew.associate.footballappfinal.match.Match
+import com.andrew.associate.footballappfinal.match.MatchFragment
+import com.andrew.associate.footballappfinal.match.detail.MatchDetailActivity
+import com.andrew.associate.footballappfinal.match.nextmatch.NextMatchFragment
+import com.andrew.associate.footballappfinal.match.prevmatch.PrevMatchFragment
 import com.andrew.associate.footballappfinal.teams.TeamsFragment
 import kotlinx.android.synthetic.main.activity_home.*
+import org.jetbrains.anko.startActivity
 
-class HomeActivity : AppCompatActivity() {
+class HomeActivity : AppCompatActivity(),
+    NextMatchFragment.OnFragLinkListener,
+    PrevMatchFragment.OnFragLinkListener{
+
+    override fun onFragmentLink(game: Match) {
+        startActivity<MatchDetailActivity>(
+            "id_event" to game.matchId,
+            "date_event" to game.matchDate,
+            "home_team" to game.homeTeam,
+            "home_score" to game.homeScore,
+            "away_team" to game.awayTeam,
+            "away_score" to game.awayScore,
+            "time_event" to game.matchTime
+        )
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,9 +37,9 @@ class HomeActivity : AppCompatActivity() {
 
         bottom_navigation.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
-//                next_match -> {
-//                    loadMatchFragment(savedInstanceState)
-//                }
+                match -> {
+                    loadMatchFragment(savedInstanceState)
+                }
 
                 team -> {
                     loadTeamsFragment(savedInstanceState)
@@ -32,7 +51,16 @@ class HomeActivity : AppCompatActivity() {
             }
             true
         }
-        bottom_navigation.selectedItemId = team
+        bottom_navigation.selectedItemId = match
+    }
+
+    private fun loadMatchFragment(savedInstanceState: Bundle?){
+        if (savedInstanceState == null) {
+            supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.main_container, MatchFragment(), MatchFragment::class.java.simpleName)
+                .commit()
+        }
     }
 
     private fun loadTeamsFragment(savedInstanceState: Bundle?){

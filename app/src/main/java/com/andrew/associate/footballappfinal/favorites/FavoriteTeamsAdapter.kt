@@ -7,11 +7,11 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.andrew.associate.footballappfinal.R
-import com.andrew.associate.footballappfinal.db.Favorite
+import com.andrew.associate.footballappfinal.db.FavoriteTeam
 import com.squareup.picasso.Picasso
 import org.jetbrains.anko.*
 
-class FavoriteTeamsAdapter(private val favorite: List<Favorite>, private val listener: (Favorite) -> Unit)
+class FavoriteTeamsAdapter(private val favoriteTeam: List<FavoriteTeam>, private val listener: (FavoriteTeam) -> Unit)
     : RecyclerView.Adapter<FavoriteViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoriteViewHolder {
@@ -19,10 +19,10 @@ class FavoriteTeamsAdapter(private val favorite: List<Favorite>, private val lis
     }
 
     override fun onBindViewHolder(holder: FavoriteViewHolder, position: Int) {
-        holder.bindItem(favorite[position], listener)
+        holder.bindItem(favoriteTeam[position], listener)
     }
 
-    override fun getItemCount(): Int = favorite.size
+    override fun getItemCount(): Int = favoriteTeam.size
 
 }
 
@@ -59,9 +59,9 @@ class FavoriteViewHolder(view: View) : RecyclerView.ViewHolder(view){
     private val teamBadge: ImageView = view.find(R.id.team_badge)
     private val teamName: TextView = view.find(R.id.team_name)
 
-    fun bindItem(favorite: Favorite, listener: (Favorite) -> Unit){
-        Picasso.get().load(favorite.teamBadge).into(teamBadge)
-        teamName.text = favorite.teamName
-        itemView.setOnClickListener { listener(favorite) }
+    fun bindItem(favoriteTeam: FavoriteTeam, listener: (FavoriteTeam) -> Unit){
+        Picasso.get().load(favoriteTeam.teamBadge).into(teamBadge)
+        teamName.text = favoriteTeam.teamName
+        itemView.setOnClickListener { listener(favoriteTeam) }
     }
 }

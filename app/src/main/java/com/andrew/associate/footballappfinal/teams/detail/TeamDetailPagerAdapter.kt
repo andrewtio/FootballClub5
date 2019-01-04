@@ -32,5 +32,4 @@ class TeamDetailPagerAdapter(fm: FragmentManager): FragmentPagerAdapter(fm){
             else -> null
         }
     }
-
 }

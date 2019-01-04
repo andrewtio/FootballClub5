@@ -33,5 +33,36 @@
     <string name="player_position">Player Position</string>
     <string name="player_height">Player Height:</string>
     <string name="player_weight">Player Weight:</string>
+    <string name="match">Match</string>
+    <string name="date">Date</string>
+    <string name="time">Time</string>
+    <string name="image">Image</string>
+    <string name="home_team">Home Team</string>
+    <string name="goal">Goal</string>
+    <string name="versus">Versus</string>
+    <string name="away_team">Away Team</string>
+    <string name="home_scorer">Home Scorer</string>
+    <string name="goals">Goals</string>
+    <string name="away_scorer">Away Scorer</string>
+    <string name="home_shots">Home Shots</string>
+    <string name="shots">Shots</string>
+    <string name="away_shots">Away Shots</string>
+    <string name="lineups">Lineups</string>
+    <string name="home_gk">Home GK</string>
+    <string name="goal_keeper">Goal Keeper</string>
+    <string name="away_gk">Away GoalKeeper</string>
+    <string name="home_def">Home Defender</string>
+    <string name="defender">Defender</string>
+    <string name="away_def">Away Defender</string>
+    <string name="home_mid">Home Midfielder</string>
+    <string name="midfielder">Midfielder</string>
+    <string name="away_mid">Away Midfielder</string>
+    <string name="home_fw">Home Forward</string>
+    <string name="striker">Striker</string>
+    <string name="away_fw">Away Forward</string>
+    <string name="home_sub">Home Subtitute</string>
+    <string name="subtitutes">Subsitutes</string>
+    <string name="away_sub">Away Subitutes</string>
+    <string name="textDetails">%1$s\n%2$s</string>
 
 </resources>

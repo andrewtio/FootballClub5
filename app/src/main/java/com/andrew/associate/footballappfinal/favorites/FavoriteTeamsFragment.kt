@@ -10,7 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.andrew.associate.footballappfinal.R.color.colorAccent
-import com.andrew.associate.footballappfinal.db.Favorite
+import com.andrew.associate.footballappfinal.db.FavoriteTeam
 import com.andrew.associate.footballappfinal.db.database
 import com.andrew.associate.footballappfinal.teams.detail.TeamDetailActivity
 import org.jetbrains.anko.*
@@ -22,7 +22,7 @@ import org.jetbrains.anko.support.v4.swipeRefreshLayout
 
 class FavoriteTeamsFragment : Fragment(), AnkoComponent<Context> {
 
-    private var favorites: MutableList<Favorite> = mutableListOf()
+    private var favoriteTeams: MutableList<FavoriteTeam> = mutableListOf()
     private lateinit var adapter: FavoriteTeamsAdapter
     private lateinit var listTeam: RecyclerView
     private lateinit var swipeRefresh: SwipeRefreshLayout
@@ -30,7 +30,7 @@ class FavoriteTeamsFragment : Fragment(), AnkoComponent<Context> {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        adapter = FavoriteTeamsAdapter(favorites){
+        adapter = FavoriteTeamsAdapter(favoriteTeams){
             context?.startActivity<TeamDetailActivity>("id" to "${it.teamId}")
         }
 
@@ -46,12 +46,12 @@ class FavoriteTeamsFragment : Fragment(), AnkoComponent<Context> {
     }
 
     private fun showFavorite(){
-        favorites.clear()
+        favoriteTeams.clear()
         context?.database?.use {
             swipeRefresh.isRefreshing = false
-            val result = select(Favorite.TABLE_FAVORITE)
-            val favorite = result.parseList(classParser<Favorite>())
-            favorites.addAll(favorite)
+            val result = select(FavoriteTeam.TABLE_FAVORITE)
+            val favorite = result.parseList(classParser<FavoriteTeam>())
+            favoriteTeams.addAll(favorite)
             adapter.notifyDataSetChanged()
         }
     }
