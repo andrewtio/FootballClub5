@@ -1,4 +1,4 @@
-package com.andrew.associate.footballappfinal.favorites
+package com.andrew.associate.footballappfinal.favorites.favoriteteam
 
 import android.content.Context
 import android.os.Bundle
@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import com.andrew.associate.footballappfinal.R.color.colorAccent
 import com.andrew.associate.footballappfinal.db.FavoriteTeam
 import com.andrew.associate.footballappfinal.db.database
+import com.andrew.associate.footballappfinal.teams.Team
 import com.andrew.associate.footballappfinal.teams.detail.TeamDetailActivity
 import org.jetbrains.anko.*
 import org.jetbrains.anko.db.classParser
@@ -22,19 +23,19 @@ import org.jetbrains.anko.support.v4.swipeRefreshLayout
 
 class FavoriteTeamsFragment : Fragment(), AnkoComponent<Context> {
 
-    private var favoriteTeams: MutableList<FavoriteTeam> = mutableListOf()
+    private var favoriteTeams: MutableList<Team> = mutableListOf()
     private lateinit var adapter: FavoriteTeamsAdapter
-    private lateinit var listTeam: RecyclerView
+    private lateinit var listFavorite: RecyclerView
     private lateinit var swipeRefresh: SwipeRefreshLayout
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
         adapter = FavoriteTeamsAdapter(favoriteTeams){
-            context?.startActivity<TeamDetailActivity>("id" to "${it.teamId}")
+            context?.startActivity<TeamDetailActivity>("team_data" to it)
         }
 
-        listTeam.adapter = adapter
+        listFavorite.adapter = adapter
         swipeRefresh.onRefresh{
             showFavorite()
         }
@@ -49,8 +50,8 @@ class FavoriteTeamsFragment : Fragment(), AnkoComponent<Context> {
         favoriteTeams.clear()
         context?.database?.use {
             swipeRefresh.isRefreshing = false
-            val result = select(FavoriteTeam.TABLE_FAVORITE)
-            val favorite = result.parseList(classParser<FavoriteTeam>())
+            val result = select(FavoriteTeam.TABLE_FAVORITE_TEAM)
+            val favorite = result.parseList(classParser<Team>())
             favoriteTeams.addAll(favorite)
             adapter.notifyDataSetChanged()
         }
@@ -73,7 +74,7 @@ class FavoriteTeamsFragment : Fragment(), AnkoComponent<Context> {
                     android.R.color.holo_orange_light,
                     android.R.color.holo_red_light)
 
-                listTeam = recyclerView {
+                listFavorite = recyclerView {
                     lparams (width = matchParent, height = wrapContent)
                     layoutManager = LinearLayoutManager(ctx)
                 }

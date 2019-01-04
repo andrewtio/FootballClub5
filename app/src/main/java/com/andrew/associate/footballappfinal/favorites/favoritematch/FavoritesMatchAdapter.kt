@@ -1,29 +1,32 @@
-package com.andrew.associate.footballappfinal.match.prevmatch
+package com.andrew.associate.footballappfinal.favorites.favoritematch
 
 import android.graphics.Typeface
 import android.support.v7.widget.RecyclerView
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.andrew.associate.footballappfinal.R
-import com.andrew.associate.footballappfinal.R.id.*
+import com.andrew.associate.footballappfinal.db.FavoriteMatch
 import com.andrew.associate.footballappfinal.match.Match
+import com.andrew.associate.footballappfinal.match.prevmatch.PrevMatchFragment
+import com.andrew.associate.footballappfinal.teams.Team
 import com.andrew.associate.footballappfinal.utils.formatToGMT
+import com.squareup.picasso.Picasso
 import org.jetbrains.anko.*
-import org.jetbrains.anko.custom.style
 import java.text.SimpleDateFormat
 
-class PrevMatchAdapter(private val matches: List<Match>,
-                       private val listener: PrevMatchFragment.OnFragLinkListener?)
-    : RecyclerView.Adapter<PrevMatchViewHolder>() {
+class FavoritesMatchAdapter(private val matches: List<FavoriteMatch>,
+                       private val listener: (FavoriteMatch) -> Unit)
+    : RecyclerView.Adapter<FavoriteMatchViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PrevMatchViewHolder {
-        return PrevMatchViewHolder(TeamUI().createView(AnkoContext.create(parent.context, parent)))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoriteMatchViewHolder {
+        return FavoriteMatchViewHolder(TeamUI().createView(AnkoContext.create(parent.context, parent)))
     }
 
-    override fun onBindViewHolder(holder: PrevMatchViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: FavoriteMatchViewHolder, position: Int) {
         holder.bindItem(matches[position], listener)
     }
 
@@ -40,7 +43,7 @@ class TeamUI : AnkoComponent<ViewGroup> {
                 orientation = LinearLayout.VERTICAL
 
                 textView {
-                    id = match_date
+                    id = R.id.match_date
                     textSize = 12f
                 }.lparams{
                     margin = dip(5)
@@ -48,7 +51,7 @@ class TeamUI : AnkoComponent<ViewGroup> {
                 }
 
                 textView {
-                    id = match_time
+                    id = R.id.match_time
                     textSize = 12f
                 }.lparams{
                     margin = dip(5)
@@ -59,26 +62,25 @@ class TeamUI : AnkoComponent<ViewGroup> {
                     lparams(width = matchParent, height = wrapContent)
                     padding = dip(5)
                     orientation = LinearLayout.HORIZONTAL
-                    this.gravity = Gravity.CENTER
 
                     textView {
-                        id = home_team
-                        textSize = 12f
+                        id = R.id.home_team
+                        textSize = 5f
                     }.lparams {
                         margin = dip(5)
                     }
 
                     textView {
-                        id = home_score
-                        textSize = 25f
+                        id = R.id.home_score
+                        textSize = 15f
                         typeface = Typeface.DEFAULT_BOLD
                     }.lparams {
-                        margin = dip(15)
+                        margin = dip(5)
                     }
 
                     textView {
                         text = "VS"
-                        textSize = 25f
+                        textSize = 15f
                         typeface = Typeface.DEFAULT_BOLD
                         gravity = Gravity.CENTER
                     }.lparams {
@@ -86,16 +88,16 @@ class TeamUI : AnkoComponent<ViewGroup> {
                     }
 
                     textView {
-                        id = away_score
-                        textSize = 25f
+                        id = R.id.away_score
+                        textSize = 15f
                         typeface = Typeface.DEFAULT_BOLD
                     }.lparams {
-                        margin = dip(15)
+                        margin = dip(5)
                     }
 
                     textView {
-                        id = away_team
-                        textSize = 12f
+                        id = R.id.away_team
+                        textSize = 5f
                     }.lparams {
                         margin = dip(5)
                     }
@@ -103,9 +105,10 @@ class TeamUI : AnkoComponent<ViewGroup> {
             }
         }
     }
+
 }
 
-class PrevMatchViewHolder(view: View) : RecyclerView.ViewHolder(view){
+class FavoriteMatchViewHolder(view: View) : RecyclerView.ViewHolder(view){
 
     private val matchDate: TextView = view.find(R.id.match_date)
     private val homeTeam: TextView = view.find(R.id.home_team)
@@ -114,23 +117,22 @@ class PrevMatchViewHolder(view: View) : RecyclerView.ViewHolder(view){
     private val awayScore: TextView = view.find(R.id.away_score)
     private val matchTime: TextView = view.find(R.id.match_time)
 
+    fun bindItem(favorite: FavoriteMatch, listener: (FavoriteMatch) -> Unit){
 
-    fun bindItem(match: Match, listener: PrevMatchFragment.OnFragLinkListener?){
-
-        val timeChanger = formatToGMT(match.matchDate, match.matchTime)
+        val timeChanger = formatToGMT(favorite.dateEvent, favorite.matchTime)
         val dateFormat = SimpleDateFormat("E, dd MMM yyyy")
         val timeFormat = SimpleDateFormat("HH:mm")
         val date = dateFormat.format(timeChanger)
         val changedTime = timeFormat.format(timeChanger)
 
-        match.matchTime
-        match.matchDate
+        favorite.matchTime
+        favorite.dateEvent
         matchDate.text = date
-        homeTeam.text = match.homeTeam
-        awayTeam.text = match.awayTeam
-        homeScore.text = match.homeScore
-        awayScore.text = match.awayScore
+        homeTeam.text = favorite.homeTeam
+        awayTeam.text = favorite.awayTeam
+        homeScore.text = favorite.homeScore
+        awayScore.text = favorite.awayScore
         matchTime.text = changedTime
-        itemView.setOnClickListener { listener?.onFragmentLink(match) }
+        itemView.setOnClickListener { listener(favorite) }
     }
 }

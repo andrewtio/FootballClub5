@@ -5,7 +5,8 @@ import android.os.Bundle
 import com.andrew.associate.footballappfinal.R
 import com.andrew.associate.footballappfinal.R.id.*
 import com.andrew.associate.footballappfinal.R.layout.activity_home
-import com.andrew.associate.footballappfinal.favorites.FavoriteTeamsFragment
+import com.andrew.associate.footballappfinal.favorites.FavoriteFragment
+import com.andrew.associate.footballappfinal.favorites.favoriteteam.FavoriteTeamsFragment
 import com.andrew.associate.footballappfinal.match.Match
 import com.andrew.associate.footballappfinal.match.MatchFragment
 import com.andrew.associate.footballappfinal.match.detail.MatchDetailActivity
@@ -77,7 +78,7 @@ class HomeActivity : AppCompatActivity(),
             supportFragmentManager
                 .beginTransaction()
                 .replace(R.id.main_container,
-                    FavoriteTeamsFragment(), FavoriteTeamsFragment::class.java.simpleName)
+                    FavoriteFragment(), FavoriteFragment::class.java.simpleName)
                 .commit()
         }
     }

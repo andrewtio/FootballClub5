@@ -1,4 +1,4 @@
-package com.andrew.associate.footballappfinal.favorites
+package com.andrew.associate.footballappfinal.favorites.favoriteteam
 
 import android.support.v7.widget.RecyclerView
 import android.view.View
@@ -7,11 +7,12 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.andrew.associate.footballappfinal.R
-import com.andrew.associate.footballappfinal.db.FavoriteTeam
+import com.andrew.associate.footballappfinal.teams.Team
 import com.squareup.picasso.Picasso
 import org.jetbrains.anko.*
 
-class FavoriteTeamsAdapter(private val favoriteTeam: List<FavoriteTeam>, private val listener: (FavoriteTeam) -> Unit)
+class FavoriteTeamsAdapter(private val favoriteTeam: List<Team>,
+                           private val listener: (Team) -> Unit)
     : RecyclerView.Adapter<FavoriteViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoriteViewHolder {
@@ -59,7 +60,7 @@ class FavoriteViewHolder(view: View) : RecyclerView.ViewHolder(view){
     private val teamBadge: ImageView = view.find(R.id.team_badge)
     private val teamName: TextView = view.find(R.id.team_name)
 
-    fun bindItem(favoriteTeam: FavoriteTeam, listener: (FavoriteTeam) -> Unit){
+    fun bindItem(favoriteTeam: Team, listener: (Team) -> Unit){
         Picasso.get().load(favoriteTeam.teamBadge).into(teamBadge)
         teamName.text = favoriteTeam.teamName
         itemView.setOnClickListener { listener(favoriteTeam) }

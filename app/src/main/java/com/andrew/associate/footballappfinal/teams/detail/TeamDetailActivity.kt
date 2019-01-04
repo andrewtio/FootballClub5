@@ -140,7 +140,7 @@ class TeamDetailActivity : AppCompatActivity() {
 
     private fun favoriteState(){
         database.use {
-            val result = select(FavoriteTeam.TABLE_FAVORITE)
+            val result = select(FavoriteTeam.TABLE_FAVORITE_TEAM)
                 .whereArgs("(TEAM_ID = {id})",
                     "id" to teams.teamId.toString() )
             val favorite = result.parseList(classParser<FavoriteTeam>())
@@ -197,26 +197,29 @@ class TeamDetailActivity : AppCompatActivity() {
     private fun addToFavorite(){
         try {
             database.use {
-                insert(FavoriteTeam.TABLE_FAVORITE,
+                insert(FavoriteTeam.TABLE_FAVORITE_TEAM,
                     FavoriteTeam.TEAM_ID to teams.teamId,
                     FavoriteTeam.TEAM_NAME to teams.teamName,
-                    FavoriteTeam.TEAM_BADGE to teams.teamBadge)
+                    FavoriteTeam.TEAM_BADGE to teams.teamBadge,
+                    FavoriteTeam.TEAM_YEAR to teams.teamFormedYear,
+                    FavoriteTeam.TEAM_STADIUM to teams.teamStadium,
+                    FavoriteTeam.TEAM_DESC to teams.teamDescription)
             }
-            swipeRefresh.snackbar("Added to favorite team").show()
+            snackbar(detail_club_activity, "Added to favorite team").show()
         } catch (e: SQLiteConstraintException){
-            swipeRefresh.snackbar(e.localizedMessage).show()
+            snackbar(detail_club_activity, e.localizedMessage).show()
         }
     }
 
     private fun removeFromFavorite(){
         try {
             database.use {
-                delete(FavoriteTeam.TABLE_FAVORITE, "(TEAM_ID = {id})",
-                    "id" to id)
+                delete(FavoriteTeam.TABLE_FAVORITE_TEAM, "(TEAM_ID = {id})",
+                    "id" to teams.teamId.toString())
             }
-            swipeRefresh.snackbar( "Removed to favorite").show()
+            snackbar(detail_club_activity, "Removed to favorite").show()
         } catch (e: SQLiteConstraintException){
-            swipeRefresh.snackbar(e.localizedMessage).show()
+            snackbar(detail_club_activity, e.localizedMessage).show()
         }
     }
     // test merge

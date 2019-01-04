@@ -11,7 +11,8 @@ import com.andrew.associate.footballappfinal.R.id.team_name
 import com.squareup.picasso.Picasso
 import org.jetbrains.anko.*
 
-class TeamsAdapter(private val teams: List<Team>, private val listener: (Team) -> Unit)
+class TeamsAdapter(private val teams: List<Team>,
+                   private val listener: (Team) -> Unit)
     : RecyclerView.Adapter<TeamViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TeamViewHolder {

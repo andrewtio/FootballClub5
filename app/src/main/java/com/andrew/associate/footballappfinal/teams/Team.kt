@@ -6,6 +6,8 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class Team (
+    val id: Long?,
+
     @SerializedName("idTeam")
     var teamId: String? = null,
 
