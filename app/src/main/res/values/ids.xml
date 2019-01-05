@@ -23,4 +23,7 @@
     <item name="vs" type="id"/>
     <item name="VS" type="id"/>
     <item name="notification_alarm" type="id"/>
+    <item name="list_match_prev" type="id"/>
+    <item name="list_match_next" type="id"/>
+    <item name="list_match_favorite" type="id"/>
 </resources>

@@ -3,7 +3,7 @@ package com.andrew.associate.footballappfinal.match
 import com.google.gson.annotations.SerializedName
 
 data class Match (
-    val id: Int? = null,
+    val id: String? = null,
 
     @SerializedName("idEvent")
     var matchId: String? = null,

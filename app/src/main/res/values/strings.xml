@@ -64,5 +64,6 @@
     <string name="subtitutes">Subsitutes</string>
     <string name="away_sub">Away Subitutes</string>
     <string name="textDetails">%1$s\n%2$s</string>
+    <string name="search">Search</string>
 
 </resources>

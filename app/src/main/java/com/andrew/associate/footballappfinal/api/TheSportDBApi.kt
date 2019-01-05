@@ -90,4 +90,12 @@ object TheSportDBApi {
             .toString()
     }
 
+    fun getSearchGames(teamName: String?): String{
+        return BuildConfig.BASE_URL + "api/v1/json/${BuildConfig.TSDB_API_KEY}" + "/searchevents.php?e=" + teamName
+    }
+
+    fun getSearchClubs(teamName: String?): String{
+        return BuildConfig.BASE_URL + "api/v1/json/${BuildConfig.TSDB_API_KEY}" + "/searchteams.php?t=" + teamName
+    }
+
 }

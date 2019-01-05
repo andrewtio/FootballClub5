@@ -94,7 +94,7 @@ class FavoritesMatchFragment : Fragment(), AnkoComponent<Context> {
                     lparams (width = matchParent, height = wrapContent)
 
                     listMatch = recyclerView {
-                        id = R.id.list_match
+                        id = R.id.list_match_favorite
                         lparams (width = matchParent, height = wrapContent)
                         layoutManager = LinearLayoutManager(ctx)
                     }
