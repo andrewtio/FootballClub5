@@ -1,8 +1,12 @@
-package com.andrew.associate.footballappfinal.teams
+package com.andrew.associate.footballappfinal.teams.detail.players
 
 import com.andrew.associate.footballappfinal.TestContextProvider
 import com.andrew.associate.footballappfinal.api.ApiRepository
 import com.andrew.associate.footballappfinal.api.TheSportDBApi
+import com.andrew.associate.footballappfinal.teams.Team
+import com.andrew.associate.footballappfinal.teams.TeamResponse
+import com.andrew.associate.footballappfinal.teams.TeamsPresenter
+import com.andrew.associate.footballappfinal.teams.TeamsView
 import com.google.gson.Gson
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -13,10 +17,10 @@ import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
 
-class TeamsPresenterTest{
+class PlayersPresenterTest{
     @Mock
     private
-    lateinit var view: TeamsView
+    lateinit var view: PlayersView
 
     @Mock
     private
@@ -26,33 +30,33 @@ class TeamsPresenterTest{
     private
     lateinit var apiRepository: ApiRepository
 
-    private lateinit var presenter: TeamsPresenter
+    private lateinit var presenter: PlayersPresenter
 
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
-        presenter = TeamsPresenter(view, apiRepository, gson, TestContextProvider())
+        presenter = PlayersPresenter(view, apiRepository, gson, TestContextProvider())
     }
 
     @Test
-    fun testGetPlayersList() {
-        val teams: MutableList<Team> = mutableListOf()
-        val response = TeamResponse(teams)
-        val league = "English Premiere League"
+    fun testGetTeamList() {
+        val players: MutableList<Player> = mutableListOf()
+        val response = PlayerResponse(players)
+        val idTeam = "133604"
 
         GlobalScope.launch {
             Mockito.`when`(
                 gson.fromJson(
                     apiRepository
-                        .doRequest(TheSportDBApi.getTeams(league)).await(),
-                    TeamResponse::class.java
+                        .doRequest(TheSportDBApi.getPlayers(idTeam)).await(),
+                    PlayerResponse::class.java
                 )
             ).thenReturn(response)
 
-            presenter.getTeamList(league)
+            presenter.getPlayerList(idTeam)
 
             Mockito.verify(view).showLoading()
-            Mockito.verify(view).showTeamList(teams)
+            Mockito.verify(view).showPlayersList(players)
             Mockito.verify(view).hideLoading()
         }
     }

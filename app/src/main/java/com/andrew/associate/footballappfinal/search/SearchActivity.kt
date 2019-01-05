@@ -18,8 +18,8 @@ import org.jetbrains.anko.support.v4.onRefresh
 
 class SearchActivity: AppCompatActivity(), GameSearchView {
 
-    private var eDI: MutableList<Match> = mutableListOf()
-    private var extraGDI : MutableList<Match> = mutableListOf()
+    private var match: MutableList<Match> = mutableListOf()
+    private var matchItem : MutableList<MatchItems> = mutableListOf()
 
     private lateinit var sGA: SearchGameAdapter
     private lateinit var rV: RecyclerView
@@ -45,27 +45,26 @@ class SearchActivity: AppCompatActivity(), GameSearchView {
         val gson = Gson()
         sGP = SearchPresenter(this,apiRepository,gson)
 
-        sGA = SearchGameAdapter(eDI){
-            extraGDI.clear()
-            extraGDI.add(Match(
+        sGA = SearchGameAdapter(match){
+            matchItem.clear()
+            matchItem.add(MatchItems(
                 it.matchId,
                 it.matchDate,
+                it.matchTime,
+                "",
                 it.homeTeam,
                 it.homeScore,
-                "",
                 it.awayTeam,
-                it.awayScore,
-                "",
-                it.matchTime
+                it.awayScore
             ))
             ctx.startActivity<MatchDetailActivity>(
-                "id_event" to extraGDI[0].matchId,
-                "home_team" to extraGDI[0].homeTeam,
-                "home_score" to extraGDI[0].homeScore,
-                "away_team" to extraGDI[0].awayTeam,
-                "away_score" to extraGDI[0].awayScore,
-                "date_event" to extraGDI[0].matchDate,
-                "time_event" to extraGDI[0].matchTime
+                "id_event" to matchItem[0].matchId,
+                "home_team" to matchItem[0].homeTeam,
+                "home_score" to matchItem[0].homeScore,
+                "away_team" to matchItem[0].awayTeam,
+                "away_score" to matchItem[0].awayScore,
+                "date_event" to matchItem[0].matchDate,
+                "time_event" to matchItem[0].matchTime
             )
         }
 
@@ -80,8 +79,8 @@ class SearchActivity: AppCompatActivity(), GameSearchView {
     }
 
     override fun showGameItems(game: List<Match>) {
-        eDI.clear()
-        eDI.addAll(game)
+        match.clear()
+        match.addAll(game)
         sGA.notifyDataSetChanged()
         hideLoading()
 
