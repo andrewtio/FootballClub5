@@ -18,12 +18,12 @@ import org.jetbrains.anko.support.v4.onRefresh
 
 class SearchActivity: AppCompatActivity(), GameSearchView {
 
-    private var match: MutableList<Match> = mutableListOf()
-    private var matchItem : MutableList<MatchItems> = mutableListOf()
+    private var matchItems: MutableList<MatchItems> = mutableListOf()
+    private var extraMatch : MutableList<Match> = mutableListOf()
 
-    private lateinit var sGA: SearchGameAdapter
+    private lateinit var adapter: SearchGameAdapter
     private lateinit var rV: RecyclerView
-    private lateinit var sGP: SearchPresenter
+    private lateinit var presenter: SearchPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +35,7 @@ class SearchActivity: AppCompatActivity(), GameSearchView {
         game_search_view.onQueryTextListener(){
             onQueryTextChange{
                     it ->
-                sGP.getGameSearch(it)
+                presenter.getGameSearch(it)
                 true
             }
             hideLoading()
@@ -43,11 +43,11 @@ class SearchActivity: AppCompatActivity(), GameSearchView {
 
         val apiRepository = ApiRepository()
         val gson = Gson()
-        sGP = SearchPresenter(this,apiRepository,gson)
+        presenter = SearchPresenter(this,apiRepository,gson)
 
-        sGA = SearchGameAdapter(match){
-            matchItem.clear()
-            matchItem.add(MatchItems(
+        adapter = SearchGameAdapter(matchItems){
+            extraMatch.clear()
+            extraMatch.add(Match(
                 it.matchId,
                 it.matchDate,
                 it.matchTime,
@@ -58,30 +58,30 @@ class SearchActivity: AppCompatActivity(), GameSearchView {
                 it.awayScore
             ))
             ctx.startActivity<MatchDetailActivity>(
-                "id_event" to matchItem[0].matchId,
-                "home_team" to matchItem[0].homeTeam,
-                "home_score" to matchItem[0].homeScore,
-                "away_team" to matchItem[0].awayTeam,
-                "away_score" to matchItem[0].awayScore,
-                "date_event" to matchItem[0].matchDate,
-                "time_event" to matchItem[0].matchTime
+                "id_event" to extraMatch[0].matchId,
+                "home_team" to extraMatch[0].homeTeam,
+                "home_score" to extraMatch[0].homeScore,
+                "away_team" to extraMatch[0].awayTeam,
+                "away_score" to extraMatch[0].awayScore,
+                "date_event" to extraMatch[0].matchDate,
+                "time_event" to extraMatch[0].matchTime
             )
         }
 
         rV = rv_game_search
         rV.layoutManager = LinearLayoutManager(this)
-        rV.adapter = sGA
+        rV.adapter = adapter
 
         swipe_search.onRefresh{
-            sGP.getGameSearch("Chelsea")
+            presenter.getGameSearch("Chelsea")
             hideLoading()
         }
     }
 
-    override fun showGameItems(game: List<Match>) {
-        match.clear()
-        match.addAll(game)
-        sGA.notifyDataSetChanged()
+    override fun showGameItems(game: List<MatchItems>) {
+        matchItems.clear()
+        matchItems.addAll(game)
+        adapter.notifyDataSetChanged()
         hideLoading()
 
     }

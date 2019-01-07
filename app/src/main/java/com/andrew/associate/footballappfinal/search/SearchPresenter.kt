@@ -5,7 +5,6 @@ import com.andrew.associate.footballappfinal.api.TheSportDBApi
 import com.andrew.associate.footballappfinal.match.MatchResponse
 import com.andrew.associate.footballappfinal.utils.CoroutineContextProvider
 import com.google.gson.Gson
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
@@ -21,10 +20,10 @@ class SearchPresenter(private val v: GameSearchView,
             val dataGame = gson.fromJson(
                 apiRepository
                     .doRequest(TheSportDBApi.getSearchGames(clubName)).await()
-                , MatchResponse::class.java
+                , EventSearchResponse::class.java
             )
 
-            v.showGameItems(dataGame.events)
+            v.showGameItems(dataGame.event)
             v.hideLoading()
         }
     }

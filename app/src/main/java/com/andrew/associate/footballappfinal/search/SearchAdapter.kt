@@ -10,8 +10,8 @@ import com.andrew.associate.footballappfinal.utils.formatToGMT
 import kotlinx.android.synthetic.main.item_list_match.view.*
 import java.text.SimpleDateFormat
 
-class SearchGameAdapter (private var eDI: List<Match>
-                         , private val listener: (Match) -> Unit)
+class SearchGameAdapter (private var eDI: List<MatchItems>
+                         , private val listener: (MatchItems) -> Unit)
     : RecyclerView.Adapter<SearchViewHolder>(){
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): SearchViewHolder {
@@ -28,18 +28,23 @@ class SearchGameAdapter (private var eDI: List<Match>
 
 }
 
-class SearchViewHolder(val v: View): RecyclerView.ViewHolder(v){
+class SearchViewHolder(v: View): RecyclerView.ViewHolder(v){
 
-    fun bind (gameData: Match, listener: (Match) -> Unit){
+    fun bind (gameData: MatchItems, listener: (MatchItems) -> Unit){
 
-        val timeChanger = formatToGMT(gameData.matchDate, gameData.matchTime)
-        val dateFormat = SimpleDateFormat("E, dd MMM yyyy")
-        val timeFormat = SimpleDateFormat("HH:mm")
-        val date = dateFormat.format(timeChanger)
-        val changedTime = timeFormat.format(timeChanger)
+//        val timeChanger = formatToGMT(gameData.matchDate, gameData.matchTime)
+//        val dateFormat = SimpleDateFormat("E, dd MMM yyyy")
+//        val timeFormat = SimpleDateFormat("HH:mm")
+//        val date = dateFormat.format(timeChanger)
+//        val changedTime = timeFormat.format(timeChanger)
 
-        itemView.game_date_tv.text = date
-        itemView.game_time_tv.text = changedTime
+        val formatDate = SimpleDateFormat("yyyy-MM-dd")
+        val formatGMT = SimpleDateFormat("E, dd MMM yyyy")
+        val dateParse = formatDate.parse(gameData.matchDate)
+        val dateEvent = formatGMT.format(dateParse)
+
+        itemView.game_date_tv.text = dateEvent
+        itemView.game_time_tv.text = gameData.matchTime
         itemView.home_club_tv.text = gameData.homeTeam
         itemView.away_club_tv.text = gameData.awayTeam
         itemView.home_point_tv.text = gameData.homeScore
