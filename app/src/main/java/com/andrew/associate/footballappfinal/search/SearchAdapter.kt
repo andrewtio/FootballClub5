@@ -9,6 +9,7 @@ import com.andrew.associate.footballappfinal.match.Match
 import com.andrew.associate.footballappfinal.utils.formatToGMT
 import kotlinx.android.synthetic.main.item_list_match.view.*
 import java.text.SimpleDateFormat
+import java.util.*
 
 class SearchGameAdapter (private var eDI: List<MatchItems>
                          , private val listener: (MatchItems) -> Unit)
@@ -42,6 +43,11 @@ class SearchViewHolder(v: View): RecyclerView.ViewHolder(v){
         val formatGMT = SimpleDateFormat("E, dd MMM yyyy")
         val dateParse = formatDate.parse(gameData.matchDate)
         val dateEvent = formatGMT.format(dateParse)
+
+//        val formatTime = SimpleDateFormat("yyyy-MM-dd")
+//        val formatGMT = SimpleDateFormat("E, dd MMM yyyy")
+//        val dateParse = formatDate.parse(gameData.matchDate)
+//        val dateEvent = formatGMT.format(dateParse)
 
         itemView.game_date_tv.text = dateEvent
         itemView.game_time_tv.text = gameData.matchTime

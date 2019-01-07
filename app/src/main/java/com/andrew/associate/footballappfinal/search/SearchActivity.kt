@@ -76,6 +76,8 @@ class SearchActivity: AppCompatActivity(), GameSearchView {
             presenter.getGameSearch("Chelsea")
             hideLoading()
         }
+
+
     }
 
     override fun showGameItems(game: List<MatchItems>) {
