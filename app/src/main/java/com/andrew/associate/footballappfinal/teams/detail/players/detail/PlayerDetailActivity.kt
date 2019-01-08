@@ -1,25 +1,14 @@
 package com.andrew.associate.footballappfinal.teams.detail.players.detail
 
-import android.graphics.Color
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v4.content.ContextCompat
-import android.support.v4.widget.SwipeRefreshLayout
-import android.view.Gravity
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.TextView
 import com.andrew.associate.footballappfinal.R
-import com.andrew.associate.footballappfinal.api.ApiRepository
 import com.andrew.associate.footballappfinal.teams.detail.players.Player
-import com.andrew.associate.footballappfinal.utils.invisible
-import com.andrew.associate.footballappfinal.utils.visible
-import com.google.gson.Gson
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_detail_player.*
-import kotlinx.android.synthetic.main.activity_detail_team.*
-import org.jetbrains.anko.*
 
 class PlayerDetailActivity : AppCompatActivity() {
 
