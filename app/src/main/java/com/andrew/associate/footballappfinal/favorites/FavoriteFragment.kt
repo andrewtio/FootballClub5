@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import com.andrew.associate.footballappfinal.R
 import com.andrew.associate.footballappfinal.match.MatchPagerAdapter
 import kotlinx.android.synthetic.main.fragment_favorite.*
-import kotlinx.android.synthetic.main.fragment_match.*
+import kotlinx.android.synthetic.main.fragment_main_match.*
 
 class FavoriteFragment : Fragment(){
 

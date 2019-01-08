@@ -57,8 +57,7 @@ class NextMatchFragment : Fragment(), AnkoComponent<Context>,
         val spinnerAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, spinnerItems)
         spinner.adapter = spinnerAdapter
 
-
-        initRvMatchEvents()
+        matchListeners()
 
         listMatch.adapter = adapter
 
@@ -159,7 +158,7 @@ class NextMatchFragment : Fragment(), AnkoComponent<Context>,
         adapter.notifyDataSetChanged()
     }
 
-    private fun initRvMatchEvents(){
+    private fun matchListeners(){
         adapter = NextMatchAdapter(matches,true,
             listener,
             {match ->
@@ -173,19 +172,13 @@ class NextMatchFragment : Fragment(), AnkoComponent<Context>,
         val time = match.matchTime ?: "00:00"
 
         if (date.isNotEmpty()) {
-            val startTimeInMillis = MyDateFormat.gregorianDateTimeInMillis(date, time)
-            val endTimeInMillis =  startTimeInMillis + TimeUnit.MINUTES.toMillis(90)
+            val calendarInit = MyDateFormat.initCalendarDate(date, time)
+            val calendarFinalInit =  calendarInit + TimeUnit.MINUTES.toMillis(90)
 
             val intent = Intent(Intent.ACTION_EDIT)
             intent.type = "vnd.android.cursor.item/event"
-            intent.putExtra(CalendarContract.Events.TITLE, "${match.strFilename}")
-            intent.putExtra(CalendarContract.Events.EVENT_LOCATION, "${match.homeTeam}")
-            intent.putExtra(CalendarContract.Events.DESCRIPTION, "${match.strFilename}")
-            intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, startTimeInMillis)
-            intent.putExtra(CalendarContract.EXTRA_EVENT_END_TIME, endTimeInMillis)
-            intent.putExtra(CalendarContract.EXTRA_EVENT_ALL_DAY, false)
-            intent.putExtra(CalendarContract.Events.ACCESS_LEVEL, CalendarContract.Events.ACCESS_PRIVATE)
-            intent.putExtra(CalendarContract.Events.AVAILABILITY, CalendarContract.Events.AVAILABILITY_BUSY)
+            intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, calendarFinalInit)
+            intent.putExtra(CalendarContract.EXTRA_EVENT_END_TIME, calendarFinalInit)
             startActivity(intent)
         } else{
             toast("Schedule not Available")

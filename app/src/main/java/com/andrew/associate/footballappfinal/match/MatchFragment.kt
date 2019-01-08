@@ -5,7 +5,7 @@ import android.support.v4.app.Fragment
 import android.view.*
 import com.andrew.associate.footballappfinal.R
 import com.andrew.associate.footballappfinal.search.SearchActivity
-import kotlinx.android.synthetic.main.fragment_match.*
+import kotlinx.android.synthetic.main.fragment_main_match.*
 import org.jetbrains.anko.support.v4.startActivity
 
 
@@ -22,7 +22,7 @@ class MatchFragment : Fragment(){
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_match, container, false)
+        return inflater.inflate(R.layout.fragment_main_match, container, false)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {

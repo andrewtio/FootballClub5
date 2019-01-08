@@ -4,7 +4,7 @@ import java.util.*
 
 object MyDateFormat {
 
-    fun gregorianDateTimeInMillis(strDates: String, strTimes: String): Long{
+    fun initCalendarDate(strDates: String, strTimes: String): Long{
         val dates = strDates.split("-")
         val strYear = dates[0]
         val strMonth = dates[1]

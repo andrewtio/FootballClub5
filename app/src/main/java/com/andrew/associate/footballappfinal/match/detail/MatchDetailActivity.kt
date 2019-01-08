@@ -31,7 +31,7 @@ import java.util.*
 
 class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
 
-    private lateinit var detPres: MatchDetailPresenter
+    private lateinit var presenter: MatchDetailPresenter
 
     private var menuItem: Menu? = null
     private var isFavorite: Boolean = false
@@ -82,17 +82,12 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
         val apiRepository = ApiRepository()
         val gson = Gson()
 
-        detPres = MatchDetailPresenter(this,apiRepository, gson)
+        presenter = MatchDetailPresenter(this,apiRepository, gson)
 
-        detPres.getMatchDetail(id_event)
+        presenter.getMatchDetail(id_event)
 
-        if(homeTeam.equals(null) || awayTeam.equals(null)){
-            homeTeam = "Chelsea"
-            awayTeam = "Arsenal"
-        }
-
-        detPres.getTeamImage(homeTeam, "Home")
-        detPres.getTeamImage(awayTeam, "Away")
+        presenter.getTeamImage(homeTeam, "Home")
+        presenter.getTeamImage(awayTeam, "Away")
 
         toast("Match Detail")
         supportActionBar?.title = "Match Detail"
@@ -102,56 +97,24 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
     override fun showMatchDetail(item: List<MatchDetail>){
 
         // HOME
-        val homeGoalScorer    = getDataList(item[0].homeTeamScoreDetails)
-        val homeShot           = getDataList(item[0].homeTeamShots)
-        val homeGK     = getDataList(item[0].homeTeamGK)
-        val homeDef        = getDataList(item[0].homeTeamDef)
-        val homeMF       = getDataList(item[0].homeTeamMid)
-        val homeFW        = getDataList(item[0].homeTeamFwd)
-        val homeSub    = getDataList(item[0].homeTeamSub)
-
-        setToTextDetails(homeGoalScorer, home_scorer_tv)
-        setToTextDetails(homeShot, home_shots_tv)
-        setToTextDetails(homeGK, home_gk_tv)
-        setToTextDetails(homeDef, home_def_tv)
-        setToTextDetails(homeMF, home_mid_tv)
-        setToTextDetails(homeFW, home_fw_tv)
-        setToTextDetails(homeSub, home_sub_tv)
+        home_scorer_tv.text = item[0].homeTeamScoreDetails
+        home_shots_tv.text = item[0].homeTeamShots
+        home_gk_tv.text = item[0].homeTeamGK
+        home_def_tv.text = item[0].homeTeamDef
+        home_mid_tv.text = item[0].homeTeamMid
+        home_fw_tv.text = item[0].homeTeamFwd
+        home_sub_tv.text = item[0].homeTeamSub
 
         // AWAY
-        val awayGoalScorer    = getDataList(item[0].awayTeamScoreDetails)
-        val awayShot           = getDataList(item[0].awayTeamShots)
-        val awayGK     = getDataList(item[0].awayTeamGK)
-        val awayDef        = getDataList(item[0].awayTeamDef)
-        val awayMF       = getDataList(item[0].awayTeamMid)
-        val awayFW        = getDataList(item[0].awayTeamFwd)
-        val awaySub    = getDataList(item[0].awayTeamSub)
 
-        setToTextDetails(awayGoalScorer, away_scorer_tv)
-        setToTextDetails(awayShot, away_shots_tv)
-        setToTextDetails(awayGK, away_gk_tv)
-        setToTextDetails(awayDef, away_def_tv)
-        setToTextDetails(awayMF, away_mid_tv)
-        setToTextDetails(awayFW, away_fw_tv)
-        setToTextDetails(awaySub, away_sub_tv)
+        away_scorer_tv.text = item[0].awayTeamScoreDetails
+        away_shots_tv.text = item[0].awayTeamShots
+        away_gk_tv.text = item[0].awayTeamGK
+        away_def_tv.text = item[0].awayTeamDef
+        away_mid_tv.text = item[0].awayTeamMid
+        away_fw_tv.text = item[0].awayTeamFwd
+        away_sub_tv.text = item[0].awayTeamSub
 
-    }
-
-    private fun getDataString(text: String?, data: String): String {
-        return if (data != "null")
-            getString(R.string.textDetails,text, data)
-        else
-            getString(R.string.textDetails, ""," - ")
-    }
-
-    private fun getDataList (item: String?): List<String> {
-        return item.toString().split(";")
-    }
-
-    private fun setToTextDetails(Items: List<String> , textView: TextView){
-        for (value in Items) {
-            textView.text = getDataString(textView.text.toString(), value.trim() )
-        }
     }
 
     override fun showHomeTeamImage(item: List<Image>){
