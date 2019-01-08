@@ -4,8 +4,8 @@ import android.widget.ProgressBar
 
 interface MatchDetailView {
 
-    fun showMatchDetail(data: List<MatchDetail>)
-    fun showHomeTeamImage (data: List<Image>)
-    fun showAwayTeamImage (data: List<Image>)
+    fun showMatchDetail(match: List<MatchDetail>)
+    fun showHomeTeamImage (match: List<Image>)
+    fun showAwayTeamImage (match: List<Image>)
 
 }

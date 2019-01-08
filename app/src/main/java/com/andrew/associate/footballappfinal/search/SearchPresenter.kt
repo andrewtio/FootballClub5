@@ -15,7 +15,6 @@ class SearchPresenter(private val v: GameSearchView,
 ) {
 
     fun getGameSearch(clubName: String?) {
-        v.showLoading()
         GlobalScope.launch(context.main) {
             val dataGame = gson.fromJson(
                 apiRepository
@@ -24,7 +23,6 @@ class SearchPresenter(private val v: GameSearchView,
             )
 
             v.showGameItems(dataGame.event)
-            v.hideLoading()
         }
     }
 }

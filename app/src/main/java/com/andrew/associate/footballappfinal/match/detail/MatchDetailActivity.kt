@@ -3,28 +3,21 @@ package com.andrew.associate.footballappfinal.match.detail
 import android.database.sqlite.SQLiteConstraintException
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
-import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
-import android.widget.ProgressBar
-import android.widget.TextView
 import com.andrew.associate.footballappfinal.R
 import com.andrew.associate.footballappfinal.R.menu.detail_menu
 import com.andrew.associate.footballappfinal.api.ApiRepository
 import com.andrew.associate.footballappfinal.db.FavoriteMatch
-import com.andrew.associate.footballappfinal.db.FavoriteTeam
 import com.andrew.associate.footballappfinal.db.database
 import com.google.gson.Gson
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.activity_detail_team.*
 import kotlinx.android.synthetic.main.activity_match_detail.*
 import org.jetbrains.anko.db.classParser
 import org.jetbrains.anko.db.delete
 import org.jetbrains.anko.db.insert
 import org.jetbrains.anko.db.select
-import org.jetbrains.anko.design.snackbar
 import org.jetbrains.anko.toast
 import java.text.SimpleDateFormat
 import java.util.*
@@ -94,38 +87,38 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
 
     }
 
-    override fun showMatchDetail(item: List<MatchDetail>){
+    override fun showMatchDetail(match: List<MatchDetail>){
 
         // HOME
-        home_scorer_tv.text = item[0].homeTeamScoreDetails
-        home_shots_tv.text = item[0].homeTeamShots
-        home_gk_tv.text = item[0].homeTeamGK
-        home_def_tv.text = item[0].homeTeamDef
-        home_mid_tv.text = item[0].homeTeamMid
-        home_fw_tv.text = item[0].homeTeamFwd
-        home_sub_tv.text = item[0].homeTeamSub
+        home_scorer_tv.text = match[0].homeTeamScoreDetails
+        home_shots_tv.text = match[0].homeTeamShots
+        home_gk_tv.text = match[0].homeTeamGK
+        home_def_tv.text = match[0].homeTeamDef
+        home_mid_tv.text = match[0].homeTeamMid
+        home_fw_tv.text = match[0].homeTeamFwd
+        home_sub_tv.text = match[0].homeTeamSub
 
         // AWAY
 
-        away_scorer_tv.text = item[0].awayTeamScoreDetails
-        away_shots_tv.text = item[0].awayTeamShots
-        away_gk_tv.text = item[0].awayTeamGK
-        away_def_tv.text = item[0].awayTeamDef
-        away_mid_tv.text = item[0].awayTeamMid
-        away_fw_tv.text = item[0].awayTeamFwd
-        away_sub_tv.text = item[0].awayTeamSub
+        away_scorer_tv.text = match[0].awayTeamScoreDetails
+        away_shots_tv.text = match[0].awayTeamShots
+        away_gk_tv.text = match[0].awayTeamGK
+        away_def_tv.text = match[0].awayTeamDef
+        away_mid_tv.text = match[0].awayTeamMid
+        away_fw_tv.text = match[0].awayTeamFwd
+        away_sub_tv.text = match[0].awayTeamSub
 
     }
 
-    override fun showHomeTeamImage(item: List<Image>){
+    override fun showHomeTeamImage(match: List<Image>){
         Picasso.get()
-            .load(item[0].badgeTeam)
+            .load(match[0].badgeTeam)
             .into(fc_home_logo)
     }
 
-    override fun showAwayTeamImage(item: List<Image>){
+    override fun showAwayTeamImage(match: List<Image>){
         Picasso.get()
-            .load(item[0].badgeTeam)
+            .load(match[0].badgeTeam)
             .into(fc_away_logo)
     }
 

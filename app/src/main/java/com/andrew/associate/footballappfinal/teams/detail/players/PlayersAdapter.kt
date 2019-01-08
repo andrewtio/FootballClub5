@@ -15,7 +15,8 @@ import com.andrew.associate.footballappfinal.R.id.center_vertical
 import com.squareup.picasso.Picasso
 import org.jetbrains.anko.*
 
-class PlayersAdapter(private val players: List<Player>, private val listener: (Player) -> Unit)
+class PlayersAdapter(private val players: List<Player>,
+                     private val listener: (Player) -> Unit)
     : RecyclerView.Adapter<PlayerViewHolder>() {
 
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR1)

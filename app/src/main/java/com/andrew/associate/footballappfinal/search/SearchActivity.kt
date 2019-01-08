@@ -19,7 +19,7 @@ import org.jetbrains.anko.support.v4.onRefresh
 class SearchActivity: AppCompatActivity(), GameSearchView {
 
     private var matchItems: MutableList<MatchItems> = mutableListOf()
-    private var extraMatch : MutableList<Match> = mutableListOf()
+    private var searchMatch : MutableList<Match> = mutableListOf()
 
     private lateinit var adapter: SearchGameAdapter
     private lateinit var rV: RecyclerView
@@ -38,7 +38,6 @@ class SearchActivity: AppCompatActivity(), GameSearchView {
                 presenter.getGameSearch(it)
                 true
             }
-            hideLoading()
         }
 
         val apiRepository = ApiRepository()
@@ -46,8 +45,8 @@ class SearchActivity: AppCompatActivity(), GameSearchView {
         presenter = SearchPresenter(this,apiRepository,gson)
 
         adapter = SearchGameAdapter(matchItems){
-            extraMatch.clear()
-            extraMatch.add(Match(
+            searchMatch.clear()
+            searchMatch.add(Match(
                 it.matchId,
                 it.matchDate,
                 it.matchTime,
@@ -57,14 +56,14 @@ class SearchActivity: AppCompatActivity(), GameSearchView {
                 it.awayTeam,
                 it.awayScore
             ))
-            ctx.startActivity<MatchDetailActivity>(
-                "id_event" to extraMatch[0].matchId,
-                "home_team" to extraMatch[0].homeTeam,
-                "home_score" to extraMatch[0].homeScore,
-                "away_team" to extraMatch[0].awayTeam,
-                "away_score" to extraMatch[0].awayScore,
-                "date_event" to extraMatch[0].matchDate,
-                "time_event" to extraMatch[0].matchTime
+            this.startActivity<MatchDetailActivity>(
+                "id_event" to searchMatch[0].matchId,
+                "home_team" to searchMatch[0].homeTeam,
+                "home_score" to searchMatch[0].homeScore,
+                "away_team" to searchMatch[0].awayTeam,
+                "away_score" to searchMatch[0].awayScore,
+                "date_event" to searchMatch[0].matchDate,
+                "time_event" to searchMatch[0].matchTime
             )
         }
 
@@ -72,27 +71,12 @@ class SearchActivity: AppCompatActivity(), GameSearchView {
         rV.layoutManager = LinearLayoutManager(this)
         rV.adapter = adapter
 
-        swipe_search.onRefresh{
-            presenter.getGameSearch("Chelsea")
-            hideLoading()
-        }
-
-
     }
 
     override fun showGameItems(game: List<MatchItems>) {
         matchItems.clear()
         matchItems.addAll(game)
         adapter.notifyDataSetChanged()
-        hideLoading()
 
-    }
-
-    override fun hideLoading() {
-        ProgressGameSearch.visibility = View.GONE
-    }
-
-    override fun showLoading() {
-        ProgressGameSearch.visibility = View.VISIBLE
     }
 }

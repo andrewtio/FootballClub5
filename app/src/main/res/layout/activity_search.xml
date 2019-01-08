@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
     <android.support.design.widget.AppBarLayout
             android:id="@+id/game_search_app_bar_layout"
@@ -18,11 +19,6 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <android.support.v4.widget.SwipeRefreshLayout
-            android:id="@+id/swipe_search"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/game_search_app_bar_layout">
 
         <android.support.v7.widget.RecyclerView
                 android:id="@+id/rv_game_search"
@@ -31,12 +27,4 @@
                 android:layout_below="@+id/game_search_app_bar_layout"
                 android:padding="20dp"/>
 
-    </android.support.v4.widget.SwipeRefreshLayout>
-
-    <ProgressBar
-            android:id="@+id/ProgressGameSearch"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_centerInParent="true" />
-
-</RelativeLayout>
+</LinearLayout>

@@ -25,6 +25,7 @@ import org.jetbrains.anko.db.delete
 import org.jetbrains.anko.db.insert
 import org.jetbrains.anko.db.select
 import org.jetbrains.anko.design.snackbar
+import org.jetbrains.anko.toast
 
 class TeamDetailActivity : AppCompatActivity() {
 
@@ -51,7 +52,7 @@ class TeamDetailActivity : AppCompatActivity() {
 //        val intent = intent
 //        id = intent.getStringExtra("id")
 
-        teams = intent.getParcelableExtra("team_data")
+        teams = intent.getParcelableExtra("data")
 
         Picasso.get()
             .load(teams.teamBadge)
@@ -205,9 +206,9 @@ class TeamDetailActivity : AppCompatActivity() {
                     FavoriteTeam.TEAM_STADIUM to teams.teamStadium,
                     FavoriteTeam.TEAM_DESC to teams.teamDescription)
             }
-            snackbar(detail_club_activity, "Added to favorite team").show()
+            toast("Added to favorite team").show()
         } catch (e: SQLiteConstraintException){
-            snackbar(detail_club_activity, e.localizedMessage).show()
+            toast(e.localizedMessage).show()
         }
     }
 
@@ -217,9 +218,9 @@ class TeamDetailActivity : AppCompatActivity() {
                 delete(FavoriteTeam.TABLE_FAVORITE_TEAM, "(TEAM_ID = {id})",
                     "id" to teams.teamId.toString())
             }
-            snackbar(detail_club_activity, "Removed to favorite").show()
+            toast("Removed to favorite").show()
         } catch (e: SQLiteConstraintException){
-            snackbar(detail_club_activity, e.localizedMessage).show()
+            toast(e.localizedMessage).show()
         }
     }
     // test merge

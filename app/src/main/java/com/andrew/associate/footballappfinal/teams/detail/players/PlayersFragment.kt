@@ -34,7 +34,7 @@ class PlayersFragment : Fragment(), AnkoComponent<Context>, PlayersView {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        team = activity?.intent!!.getParcelableExtra("team_data")
+        team = activity?.intent!!.getParcelableExtra("data")
         id = team.teamId
 
         adapter = PlayersAdapter(players){

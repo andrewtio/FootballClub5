@@ -15,7 +15,6 @@ import com.andrew.associate.footballappfinal.R.id.list_match_favorite
 import com.andrew.associate.footballappfinal.db.FavoriteMatch
 import com.andrew.associate.footballappfinal.db.database
 import com.andrew.associate.footballappfinal.match.detail.MatchDetailActivity
-import com.andrew.associate.footballappfinal.utils.act
 import org.jetbrains.anko.*
 import org.jetbrains.anko.db.classParser
 import org.jetbrains.anko.db.select
@@ -36,7 +35,7 @@ class FavoritesMatchFragment : Fragment(), AnkoComponent<Context> {
         super.onActivityCreated(savedInstanceState)
 
         adapter = FavoritesMatchAdapter(favorites){
-            act?.startActivity<MatchDetailActivity>(
+            context?.startActivity<MatchDetailActivity>(
                 "id_event" to "${it.idEvent}",
                 "home_team" to "${it.homeTeam}",
                 "home_score" to "${it.homeScore}",
@@ -48,7 +47,7 @@ class FavoritesMatchFragment : Fragment(), AnkoComponent<Context> {
         }
 
         listMatchFav.adapter = adapter
-        listMatchFav.layoutManager = LinearLayoutManager(act)
+        listMatchFav.layoutManager = LinearLayoutManager(context)
         swipeRefresh.onRefresh{
             showFavorite()
         }

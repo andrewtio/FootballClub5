@@ -134,33 +134,7 @@ class PlayerDetailActivity : AppCompatActivity() {
 //        playerDescription.text = data[0].strDescriptionEN
 //    }
 
-
-
-
-
 //        swipeRefresh.onRefresh{
 //            presenter.getTeamDetail(id)
 //        }
 }
-
-
-//    override fun showLoading() {
-//        progressBar.visible()
-//    }
-
-//    override fun hideLoading() {
-//        progressBar.invisible()
-//    }
-
-//    override fun showTeamDetail(data: List<Team>) {
-//        teams = Team(data[0].teamId,
-//            data[0].teamName,
-//            data[0].teamBadge)
-//        swipeRefresh.isRefreshing = false
-//        Picasso.get().load(data[0].teamBadge).into(teamBadge)
-//        teamName.text = data[0].teamName
-//        teamDescription.text = data[0].teamDescription
-//        teamFormedYear.text = data[0].teamFormedYear
-//        teamStadium.text = data[0].teamStadium
-//
-//    }

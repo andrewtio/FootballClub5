@@ -39,7 +39,7 @@ class DescriptionFragment : Fragment(), AnkoComponent<Context> {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        teams = activity?.intent!!.getParcelableExtra("team_data")
+        teams = activity?.intent!!.getParcelableExtra("data")
         descriptionTeam.text = teams.teamDescription
 
     }
