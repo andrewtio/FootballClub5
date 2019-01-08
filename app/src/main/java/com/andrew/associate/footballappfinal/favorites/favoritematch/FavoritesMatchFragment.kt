@@ -50,6 +50,7 @@ class FavoritesMatchFragment : Fragment(), AnkoComponent<Context> {
         }
 
         listMatch.adapter = adapter
+        listMatch.layoutManager = LinearLayoutManager(act)
         swipeRefresh.onRefresh{
             showFavorite()
         }

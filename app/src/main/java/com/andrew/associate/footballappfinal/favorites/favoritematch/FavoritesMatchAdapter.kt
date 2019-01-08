@@ -3,6 +3,7 @@ package com.andrew.associate.footballappfinal.favorites.favoritematch
 import android.graphics.Typeface
 import android.support.v7.widget.RecyclerView
 import android.view.Gravity
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -23,7 +24,9 @@ class FavoritesMatchAdapter(private val matches: List<FavoriteMatch>,
     : RecyclerView.Adapter<FavoriteMatchViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoriteMatchViewHolder {
-        return FavoriteMatchViewHolder(TeamUI().createView(AnkoContext.create(parent.context, parent)))
+        val v = LayoutInflater.from(parent.context)
+            .inflate(R.layout.item_list_match, parent, false)
+        return FavoriteMatchViewHolder(v)
     }
 
     override fun onBindViewHolder(holder: FavoriteMatchViewHolder, position: Int) {
@@ -105,17 +108,16 @@ class TeamUI : AnkoComponent<ViewGroup> {
             }
         }
     }
-
 }
 
 class FavoriteMatchViewHolder(view: View) : RecyclerView.ViewHolder(view){
 
-    private val matchDate: TextView = view.find(R.id.match_date)
-    private val homeTeam: TextView = view.find(R.id.home_team)
-    private val awayTeam: TextView = view.find(R.id.away_team)
-    private val homeScore: TextView = view.find(R.id.home_score)
-    private val awayScore: TextView = view.find(R.id.away_score)
-    private val matchTime: TextView = view.find(R.id.match_time)
+    private val matchDate: TextView = view.find(R.id.game_date_tv)
+    private val homeTeam: TextView = view.find(R.id.home_club_tv)
+    private val awayTeam: TextView = view.find(R.id.away_club_tv)
+    private val homeScore: TextView = view.find(R.id.home_point_tv)
+    private val awayScore: TextView = view.find(R.id.away_point_tv)
+    private val matchTime: TextView = view.find(R.id.game_time_tv)
 
     fun bindItem(favorite: FavoriteMatch, listener: (FavoriteMatch) -> Unit){
 

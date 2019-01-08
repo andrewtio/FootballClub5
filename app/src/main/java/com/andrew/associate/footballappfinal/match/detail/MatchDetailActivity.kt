@@ -32,7 +32,6 @@ import java.util.*
 class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
 
     private lateinit var detPres: MatchDetailPresenter
-    private lateinit var progressBar: ProgressBar
 
     private var menuItem: Menu? = null
     private var isFavorite: Boolean = false
@@ -59,8 +58,6 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
         dateEvent  = intent.getStringExtra("date_event")
         timeEvent = intent.getStringExtra("time_event")
 
-        progressBar = progress_bar_detail
-
         val dateFormat = SimpleDateFormat("yyyy-MM-dd")
         dateFormat.timeZone = TimeZone.getTimeZone("UTC")
         val GMTFormat = SimpleDateFormat("E, dd MMM yyyy")
@@ -79,8 +76,6 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
         home_goal_detail_tv.text  = homeScore
         fc_away_name.text   = awayTeam
         away_goal_detail_tv.text  = awayScore
-
-        showLoading(progressBar)
 
         favoriteState()
 
@@ -139,8 +134,6 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
         setToTextDetails(awayMF, away_mid_tv)
         setToTextDetails(awayFW, away_fw_tv)
         setToTextDetails(awaySub, away_sub_tv)
-
-        hideLoading(progressBar)
 
     }
 
@@ -221,9 +214,9 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
                     FavoriteMatch.INT_HOME_SCORE to homeScore,
                     FavoriteMatch.INT_AWAY_SCORE to awayScore)
             }
-            snackbar(swipe_detail, "Added to favorite match").show()
+            toast("Added to favorite match").show()
         } catch (e: SQLiteConstraintException){
-            snackbar(swipe_detail, e.localizedMessage).show()
+            toast(e.localizedMessage).show()
         }
     }
 
@@ -234,9 +227,9 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
                     FavoriteMatch.TABLE_FAVORITE_MATCH, "(ID_EVENT = {id_event})",
                     "id_event" to id_event)
             }
-            snackbar(swipe_detail, "Removed from favorite match").show()
+            toast("Removed from favorite match").show()
         } catch (e: SQLiteConstraintException){
-            snackbar(swipe_detail, e.localizedMessage).show()
+            toast(e.localizedMessage).show()
         }
     }
     // test merge
@@ -247,12 +240,4 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
             menuItem?.getItem(0)?.icon = ContextCompat.getDrawable(this, R.drawable.ic_add_to_favorites)
     }
 
-
-    override fun showLoading(progBar: ProgressBar){
-        progBar.visibility = View.VISIBLE
-    }
-
-    override fun hideLoading(progBar: ProgressBar){
-        progBar.visibility = View.GONE
-    }
 }

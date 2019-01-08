@@ -65,5 +65,9 @@
     <string name="away_sub">Away Subitutes</string>
     <string name="textDetails">%1$s\n%2$s</string>
     <string name="search">Search</string>
+    <string name="home_team_detail">Home Team Detail</string>
+    <string name="home_lineups">Home Lineups</string>
+    <string name="away_lineups">Away Lineups</string>
+    <string name="away_team_detail">Away Team Detail</string>
 
 </resources>
