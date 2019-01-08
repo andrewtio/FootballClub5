@@ -11,9 +11,6 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import com.andrew.associate.footballappfinal.R
 import com.andrew.associate.footballappfinal.db.FavoriteMatch
-import com.andrew.associate.footballappfinal.match.Match
-import com.andrew.associate.footballappfinal.match.prevmatch.PrevMatchFragment
-import com.andrew.associate.footballappfinal.teams.Team
 import com.andrew.associate.footballappfinal.utils.formatToGMT
 import com.squareup.picasso.Picasso
 import org.jetbrains.anko.*
@@ -24,9 +21,7 @@ class FavoritesMatchAdapter(private val matches: List<FavoriteMatch>,
     : RecyclerView.Adapter<FavoriteMatchViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoriteMatchViewHolder {
-        val v = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_list_match, parent, false)
-        return FavoriteMatchViewHolder(v)
+        return FavoriteMatchViewHolder(TeamUI().createView(AnkoContext.create(parent.context, parent)))
     }
 
     override fun onBindViewHolder(holder: FavoriteMatchViewHolder, position: Int) {
@@ -112,12 +107,12 @@ class TeamUI : AnkoComponent<ViewGroup> {
 
 class FavoriteMatchViewHolder(view: View) : RecyclerView.ViewHolder(view){
 
-    private val matchDate: TextView = view.find(R.id.game_date_tv)
-    private val homeTeam: TextView = view.find(R.id.home_club_tv)
-    private val awayTeam: TextView = view.find(R.id.away_club_tv)
-    private val homeScore: TextView = view.find(R.id.home_point_tv)
-    private val awayScore: TextView = view.find(R.id.away_point_tv)
-    private val matchTime: TextView = view.find(R.id.game_time_tv)
+    private val matchDate: TextView = view.find(R.id.match_date)
+    private val homeTeam: TextView = view.find(R.id.home_team)
+    private val awayTeam: TextView = view.find(R.id.away_team)
+    private val homeScore: TextView = view.find(R.id.home_score)
+    private val awayScore: TextView = view.find(R.id.away_score)
+    private val matchTime: TextView = view.find(R.id.match_time)
 
     fun bindItem(favorite: FavoriteMatch, listener: (FavoriteMatch) -> Unit){
 

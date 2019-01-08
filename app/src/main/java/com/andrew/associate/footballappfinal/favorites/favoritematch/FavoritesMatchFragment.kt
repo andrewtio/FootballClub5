@@ -11,17 +11,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import com.andrew.associate.footballappfinal.R
+import com.andrew.associate.footballappfinal.R.id.list_match_favorite
 import com.andrew.associate.footballappfinal.db.FavoriteMatch
-import com.andrew.associate.footballappfinal.db.FavoriteTeam
 import com.andrew.associate.footballappfinal.db.database
 import com.andrew.associate.footballappfinal.match.detail.MatchDetailActivity
-import com.andrew.associate.footballappfinal.teams.Team
 import com.andrew.associate.footballappfinal.utils.act
 import org.jetbrains.anko.*
 import org.jetbrains.anko.db.classParser
 import org.jetbrains.anko.db.select
 import org.jetbrains.anko.recyclerview.v7.recyclerView
-import org.jetbrains.anko.support.v4.ctx
 import org.jetbrains.anko.support.v4.onRefresh
 import org.jetbrains.anko.support.v4.swipeRefreshLayout
 
@@ -30,7 +28,7 @@ class FavoritesMatchFragment : Fragment(), AnkoComponent<Context> {
     private var favorites: MutableList<FavoriteMatch> = mutableListOf()
     private lateinit var adapter: FavoritesMatchAdapter
 
-    private lateinit var listMatch: RecyclerView
+    private lateinit var listMatchFav: RecyclerView
 
     private lateinit var swipeRefresh: SwipeRefreshLayout
 
@@ -49,8 +47,8 @@ class FavoritesMatchFragment : Fragment(), AnkoComponent<Context> {
             )
         }
 
-        listMatch.adapter = adapter
-        listMatch.layoutManager = LinearLayoutManager(act)
+        listMatchFav.adapter = adapter
+        listMatchFav.layoutManager = LinearLayoutManager(act)
         swipeRefresh.onRefresh{
             showFavorite()
         }
@@ -94,7 +92,7 @@ class FavoritesMatchFragment : Fragment(), AnkoComponent<Context> {
                 relativeLayout{
                     lparams (width = matchParent, height = wrapContent)
 
-                    listMatch = recyclerView {
+                    listMatchFav = recyclerView {
                         id = R.id.list_match_favorite
                         lparams (width = matchParent, height = wrapContent)
                         layoutManager = LinearLayoutManager(ctx)
