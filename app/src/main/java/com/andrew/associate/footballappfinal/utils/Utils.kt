@@ -17,10 +17,3 @@ fun View.invisible() {
 fun View.gone() {
     visibility = View.GONE
 }
-
-fun formatToGMT(date: String?, time: String?): Date?{
-    val formatter = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
-    formatter.timeZone = TimeZone.getTimeZone("UTC")
-    val dateTime = "$date $time"
-    return formatter.parse(dateTime)
-}

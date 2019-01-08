@@ -10,10 +10,10 @@ import android.widget.TextView
 import com.andrew.associate.footballappfinal.R
 import com.andrew.associate.footballappfinal.R.id.*
 import com.andrew.associate.footballappfinal.match.Match
-import com.andrew.associate.footballappfinal.utils.formatToGMT
 import org.jetbrains.anko.*
 import org.jetbrains.anko.custom.style
 import java.text.SimpleDateFormat
+import java.util.*
 
 class PrevMatchAdapter(private val matches: List<Match>,
                        private val listener: (match:Match) -> Unit)
@@ -117,20 +117,24 @@ class PrevMatchViewHolder(view: View) : RecyclerView.ViewHolder(view){
 
     fun bindItem(match: Match, listener: (match: Match) -> Unit){
 
-        val timeChanger = formatToGMT(match.matchDate, match.matchTime)
-        val dateFormat = SimpleDateFormat("E, dd MMM yyyy")
-        val timeFormat = SimpleDateFormat("HH:mm")
-        val date = dateFormat.format(timeChanger)
-        val changedTime = timeFormat.format(timeChanger)
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd")
+        dateFormat.timeZone = TimeZone.getTimeZone("UTC")
+        val GMTFormat = SimpleDateFormat("E, dd MMM yyyy")
+        val parseDate = dateFormat.parse(match.matchDate)
+        val eventDate = GMTFormat.format(parseDate)
 
-        match.matchTime
-        match.matchDate
-        matchDate.text = date
+        val timeFormat = SimpleDateFormat("hh:mm:ss")
+        timeFormat.timeZone = TimeZone.getTimeZone("UTC")
+        val timeFormatGMT = SimpleDateFormat("HH:mm")
+        val parseTime = timeFormat.parse(match.matchTime)
+        val eventTime = timeFormatGMT.format(parseTime)
+
+        matchDate.text = eventDate
         homeTeam.text = match.homeTeam
         awayTeam.text = match.awayTeam
         homeScore.text = match.homeScore
         awayScore.text = match.awayScore
-        matchTime.text = changedTime
+        matchTime.text = eventTime
         itemView.setOnClickListener { listener(match) }
     }
 }

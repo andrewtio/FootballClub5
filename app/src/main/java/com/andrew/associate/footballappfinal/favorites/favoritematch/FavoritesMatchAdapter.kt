@@ -11,10 +11,10 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import com.andrew.associate.footballappfinal.R
 import com.andrew.associate.footballappfinal.db.FavoriteMatch
-import com.andrew.associate.footballappfinal.utils.formatToGMT
 import com.squareup.picasso.Picasso
 import org.jetbrains.anko.*
 import java.text.SimpleDateFormat
+import java.util.*
 
 class FavoritesMatchAdapter(private val matches: List<FavoriteMatch>,
                        private val listener: (FavoriteMatch) -> Unit)
@@ -116,20 +116,24 @@ class FavoriteMatchViewHolder(view: View) : RecyclerView.ViewHolder(view){
 
     fun bindItem(favorite: FavoriteMatch, listener: (FavoriteMatch) -> Unit){
 
-        val timeChanger = formatToGMT(favorite.dateEvent, favorite.matchTime)
-        val dateFormat = SimpleDateFormat("E, dd MMM yyyy")
-        val timeFormat = SimpleDateFormat("HH:mm")
-        val date = dateFormat.format(timeChanger)
-        val changedTime = timeFormat.format(timeChanger)
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd")
+        dateFormat.timeZone = TimeZone.getTimeZone("UTC")
+        val GMTFormat = SimpleDateFormat("E, dd MMM yyyy")
+        val parseDate = dateFormat.parse(favorite.dateEvent)
+        val eventDate = GMTFormat.format(parseDate)
 
-        favorite.matchTime
-        favorite.dateEvent
-        matchDate.text = date
+        val timeFormat = SimpleDateFormat("hh:mm:ss")
+        timeFormat.timeZone = TimeZone.getTimeZone("UTC")
+        val timeFormatGMT = SimpleDateFormat("HH:mm")
+        val parseTime = timeFormat.parse(favorite.matchTime)
+        val eventTime = timeFormatGMT.format(parseTime)
+
+        matchDate.text = eventDate
         homeTeam.text = favorite.homeTeam
         awayTeam.text = favorite.awayTeam
         homeScore.text = favorite.homeScore
         awayScore.text = favorite.awayScore
-        matchTime.text = changedTime
+        matchTime.text = eventTime
         itemView.setOnClickListener { listener(favorite) }
     }
 }
