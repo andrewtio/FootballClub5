@@ -11,7 +11,6 @@ import com.andrew.associate.footballappfinal.R
 import com.andrew.associate.footballappfinal.R.id.*
 import com.andrew.associate.footballappfinal.match.Match
 import org.jetbrains.anko.*
-import org.jetbrains.anko.custom.style
 import java.text.SimpleDateFormat
 import java.util.*
 
