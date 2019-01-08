@@ -19,7 +19,7 @@ import java.text.SimpleDateFormat
 
 class NextMatchAdapter(private val matches: List<Match>,
                        private val alarmEnabled: Boolean,
-                       private val listener: NextMatchFragment.OnFragLinkListener?,
+                       private val listener: NextMatchFragment.initDataListener?,
                        private val alarmListener: (match: Match) -> Unit)
     : RecyclerView.Adapter<NextMatchViewHolder>() {
 
@@ -129,7 +129,7 @@ class NextMatchViewHolder(view: View) : RecyclerView.ViewHolder(view){
 
     fun bindItem(match: Match,
                  alarmEnabled: Boolean,
-                 listener: NextMatchFragment.OnFragLinkListener?,
+                 listener: NextMatchFragment.initDataListener?,
                  alarmListener: (match: Match) -> Unit) {
 
         val timeChanger = formatToGMT(match.matchDate, match.matchTime)
@@ -146,7 +146,7 @@ class NextMatchViewHolder(view: View) : RecyclerView.ViewHolder(view){
         homeScore.text = match.homeScore
         awayScore.text = match.awayScore
         matchTime.text = changedTime
-        itemView.setOnClickListener { listener?.onFragmentLink(match) }
+        itemView.setOnClickListener { listener?.initData(match) }
 
         if (alarmEnabled) {
             notificationAlarm.visible()

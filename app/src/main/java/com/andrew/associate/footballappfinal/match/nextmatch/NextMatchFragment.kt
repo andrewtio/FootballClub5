@@ -37,7 +37,7 @@ class NextMatchFragment : Fragment(), AnkoComponent<Context>,
     MatchView {
 
     private var matches: MutableList<Match> = mutableListOf()
-    private var listener: OnFragLinkListener? = null
+    private var listener: initDataListener? = null
 
     private lateinit var presenter: MatchPresenter
     private lateinit var adapter: NextMatchAdapter
@@ -192,13 +192,13 @@ class NextMatchFragment : Fragment(), AnkoComponent<Context>,
         }
     }
 
-    interface OnFragLinkListener{
-        fun onFragmentLink(game: Match)
+    interface initDataListener{
+        fun initData(game: Match)
     }
 
     override fun onAttach(ctx: Context){
         super.onAttach(ctx)
-        if (ctx is OnFragLinkListener){
+        if (ctx is initDataListener){
             listener = ctx
         }else{
             throw RuntimeException(ctx.toString() + "")

@@ -17,10 +17,10 @@ import kotlinx.android.synthetic.main.activity_home.*
 import org.jetbrains.anko.startActivity
 
 class HomeActivity : AppCompatActivity(),
-    NextMatchFragment.OnFragLinkListener,
-    PrevMatchFragment.OnFragLinkListener{
+    NextMatchFragment.initDataListener,
+    PrevMatchFragment.initDataListener{
 
-    override fun onFragmentLink(game: Match) {
+    override fun initData(game: Match) {
         startActivity<MatchDetailActivity>(
             "id_event" to game.matchId,
             "date_event" to game.matchDate,
