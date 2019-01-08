@@ -3,19 +3,13 @@ package com.andrew.associate.footballappfinal.search
 import android.graphics.Typeface
 import android.support.v7.widget.RecyclerView
 import android.view.Gravity
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.andrew.associate.footballappfinal.R
-import com.andrew.associate.footballappfinal.match.Match
-import com.andrew.associate.footballappfinal.match.prevmatch.PrevMatchViewHolder
-import com.andrew.associate.footballappfinal.match.prevmatch.TeamUI
-import kotlinx.android.synthetic.main.item_list_match.view.*
 import org.jetbrains.anko.*
 import java.text.SimpleDateFormat
-import java.util.*
 
 class SearchGameAdapter (private var eDI: List<MatchItems>
                          , private val listener: (MatchItems) -> Unit)

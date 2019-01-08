@@ -1,4 +1,4 @@
-package com.andrew.associate.footballappfinal.teams
+package com.andrew.associate.footballappfinal.search
 
 import com.andrew.associate.footballappfinal.TestContextProvider
 import com.andrew.associate.footballappfinal.api.ApiRepository
@@ -6,17 +6,18 @@ import com.andrew.associate.footballappfinal.api.TheSportDBApi
 import com.google.gson.Gson
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
+
 import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
 
-class TeamsPresenterTest{
+class SearchPresenterTest {
+
     @Mock
     private
-    lateinit var view: TeamsView
+    lateinit var view: GameSearchView
 
     @Mock
     private
@@ -26,34 +27,32 @@ class TeamsPresenterTest{
     private
     lateinit var apiRepository: ApiRepository
 
-    private lateinit var presenter: TeamsPresenter
+    private lateinit var presenter: SearchPresenter
 
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
-        presenter = TeamsPresenter(view, apiRepository, gson, TestContextProvider())
+        presenter = SearchPresenter(view, apiRepository, gson, TestContextProvider())
     }
 
     @Test
-    fun testGetSearchClubData() {
-        val teams: MutableList<Team> = mutableListOf()
-        val response = TeamResponse(teams)
+    fun getGameSearch() {
+        val matches: MutableList<MatchItems> = mutableListOf()
+        val response = EventSearchResponse(matches)
         val teamName = "Chelsea"
 
         GlobalScope.launch {
             Mockito.`when`(
                 gson.fromJson(
                     apiRepository
-                        .doRequest(TheSportDBApi.getSearchClubs(teamName)).await(),
-                    TeamResponse::class.java
+                        .doRequest(TheSportDBApi.getSearchGames(teamName)).await(),
+                    EventSearchResponse::class.java
                 )
             ).thenReturn(response)
 
-            presenter.getTeamList(teamName)
+            presenter.getGameSearch(teamName)
 
-            Mockito.verify(view).showLoading()
-            Mockito.verify(view).showTeamList(teams)
-            Mockito.verify(view).hideLoading()
+            Mockito.verify(view).showGameItems(matches)
         }
     }
 }

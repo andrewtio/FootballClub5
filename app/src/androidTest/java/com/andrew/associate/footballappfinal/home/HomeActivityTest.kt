@@ -30,10 +30,10 @@ class HomeActivityTest{
         Espresso.onView(ViewMatchers.withId(list_match_next))
             .perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(1, ViewActions.click()))
 
+        Espresso.onView(ViewMatchers.withText("Match Detail"))
+            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
         Espresso.onView(ViewMatchers.withId(add_to_favorite)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
         Espresso.onView(ViewMatchers.withId(add_to_favorite)).perform(ViewActions.click())
-//        Espresso.onView(ViewMatchers.withText("Added to favorite match"))
-//            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
         Espresso.pressBack()
 
         Thread.sleep(1000)
@@ -42,10 +42,10 @@ class HomeActivityTest{
         Espresso.onView(ViewMatchers.withId(list_match_next))
             .perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(1, ViewActions.click()))
 
+        Espresso.onView(ViewMatchers.withText("Match Detail"))
+            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
         Espresso.onView(ViewMatchers.withId(add_to_favorite)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
         Espresso.onView(ViewMatchers.withId(add_to_favorite)).perform(ViewActions.click())
-//        Espresso.onView(ViewMatchers.withText("Removed from favorite match"))
-//            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
         Espresso.pressBack()
     }
 
@@ -63,10 +63,10 @@ class HomeActivityTest{
         Espresso.onView(ViewMatchers.withId(list_team))
             .perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(1, ViewActions.click()))
 
-//        onView(withText("Club Detail")).check(matches(isDisplayed()))
+        Espresso.onView(ViewMatchers.withText("Team Detail"))
+            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
         Espresso.onView(ViewMatchers.withId(add_to_favorite)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
         Espresso.onView(ViewMatchers.withId(add_to_favorite)).perform(ViewActions.click())
-//        onView(withText("Added to Your Favorite Club")).check(matches(isDisplayed()))
         Espresso.pressBack()
 
         Thread.sleep(1000)
@@ -75,10 +75,10 @@ class HomeActivityTest{
         Espresso.onView(ViewMatchers.withId(list_team))
             .perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(1, ViewActions.click()))
 
-//        onView(withText("Club Detail")).check(matches(isDisplayed()))
+        Espresso.onView(ViewMatchers.withText("Team Detail"))
+            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
         Espresso.onView(ViewMatchers.withId(add_to_favorite)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
         Espresso.onView(ViewMatchers.withId(add_to_favorite)).perform(ViewActions.click())
-//        onView(withText("Removed from your Favorite Club")).check(matches(isDisplayed()))
         Espresso.pressBack()
     }
 }

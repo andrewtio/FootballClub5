@@ -61,6 +61,7 @@ class TeamDetailActivity : AppCompatActivity() {
         year_detail_club_tv.text = teams.teamFormedYear
         stadium_club_detail_tv.text = teams.teamStadium
 
+        toast("Match Detail")
         supportActionBar?.title = "Team Detail"
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
@@ -218,7 +219,7 @@ class TeamDetailActivity : AppCompatActivity() {
                 delete(FavoriteTeam.TABLE_FAVORITE_TEAM, "(TEAM_ID = {id})",
                     "id" to teams.teamId.toString())
             }
-            toast("Removed to favorite").show()
+            toast("Removed from favorite team").show()
         } catch (e: SQLiteConstraintException){
             toast(e.localizedMessage).show()
         }
