@@ -23,6 +23,7 @@ import com.google.gson.Gson
 import org.jetbrains.anko.*
 import org.jetbrains.anko.recyclerview.v7.recyclerView
 import org.jetbrains.anko.support.v4.onRefresh
+import org.jetbrains.anko.support.v4.startActivity
 import org.jetbrains.anko.support.v4.swipeRefreshLayout
 import java.lang.RuntimeException
 
@@ -30,7 +31,6 @@ class PrevMatchFragment : Fragment(), AnkoComponent<Context>,
     MatchView {
 
     private var matches: MutableList<Match> = mutableListOf()
-    private var listener: initDataListener? = null
     private lateinit var presenter: MatchPresenter
     private lateinit var adapter: PrevMatchAdapter
 
@@ -49,7 +49,19 @@ class PrevMatchFragment : Fragment(), AnkoComponent<Context>,
         val spinnerAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, spinnerItems)
         spinner.adapter = spinnerAdapter
 
-        adapter = PrevMatchAdapter(matches,listener)
+        adapter = PrevMatchAdapter(matches,
+            {
+                startActivity<MatchDetailActivity>(
+                    "id_event" to it.matchId,
+                    "date_event" to it.matchDate,
+                    "home_team" to it.homeTeam,
+                    "home_score" to it.homeScore,
+                    "away_team" to it.awayTeam,
+                    "away_score" to it.awayScore,
+                    "time_event" to it.matchTime
+                )
+            }
+        )
 
         listMatch.adapter = adapter
 
@@ -147,23 +159,5 @@ class PrevMatchFragment : Fragment(), AnkoComponent<Context>,
         matches.clear()
         matches.addAll(data)
         adapter.notifyDataSetChanged()
-    }
-
-    interface initDataListener{
-        fun initData(game: Match)
-    }
-
-    override fun onAttach(ctx: Context){
-        super.onAttach(ctx)
-        if (ctx is initDataListener){
-            listener = ctx
-        }else{
-            throw RuntimeException(ctx.toString() + "")
-        }
-    }
-
-    override fun onDetach(){
-        super.onDetach()
-        listener = null
     }
 }

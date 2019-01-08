@@ -16,7 +16,7 @@ import org.jetbrains.anko.custom.style
 import java.text.SimpleDateFormat
 
 class PrevMatchAdapter(private val matches: List<Match>,
-                       private val listener: PrevMatchFragment.initDataListener?)
+                       private val listener: (match:Match) -> Unit)
     : RecyclerView.Adapter<PrevMatchViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PrevMatchViewHolder {
@@ -115,7 +115,7 @@ class PrevMatchViewHolder(view: View) : RecyclerView.ViewHolder(view){
     private val matchTime: TextView = view.find(R.id.match_time)
 
 
-    fun bindItem(match: Match, listener: PrevMatchFragment.initDataListener?){
+    fun bindItem(match: Match, listener: (match: Match) -> Unit){
 
         val timeChanger = formatToGMT(match.matchDate, match.matchTime)
         val dateFormat = SimpleDateFormat("E, dd MMM yyyy")
@@ -131,6 +131,6 @@ class PrevMatchViewHolder(view: View) : RecyclerView.ViewHolder(view){
         homeScore.text = match.homeScore
         awayScore.text = match.awayScore
         matchTime.text = changedTime
-        itemView.setOnClickListener { listener?.initData(match) }
+        itemView.setOnClickListener { listener(match) }
     }
 }

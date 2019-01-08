@@ -37,7 +37,6 @@ class NextMatchFragment : Fragment(), AnkoComponent<Context>,
     MatchView {
 
     private var matches: MutableList<Match> = mutableListOf()
-    private var listener: initDataListener? = null
 
     private lateinit var presenter: MatchPresenter
     private lateinit var adapter: NextMatchAdapter
@@ -57,7 +56,22 @@ class NextMatchFragment : Fragment(), AnkoComponent<Context>,
         val spinnerAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, spinnerItems)
         spinner.adapter = spinnerAdapter
 
-        matchListeners()
+        adapter = NextMatchAdapter(matches,true,
+            {
+                startActivity<MatchDetailActivity>(
+                    "id_event" to it.matchId,
+                    "date_event" to it.matchDate,
+                    "home_team" to it.homeTeam,
+                    "home_score" to it.homeScore,
+                    "away_team" to it.awayTeam,
+                    "away_score" to it.awayScore,
+                    "time_event" to it.matchTime
+                )
+            },
+            {match ->
+                addToCalendar(match)
+            }
+        )
 
         listMatch.adapter = adapter
 
@@ -158,15 +172,6 @@ class NextMatchFragment : Fragment(), AnkoComponent<Context>,
         adapter.notifyDataSetChanged()
     }
 
-    private fun matchListeners(){
-        adapter = NextMatchAdapter(matches,true,
-            listener,
-            {match ->
-                addToCalendar(match)
-            }
-        )
-    }
-
     private fun addToCalendar(match: Match){
         val date = match.matchDate ?: ""
         val time = match.matchTime ?: "00:00"
@@ -183,23 +188,5 @@ class NextMatchFragment : Fragment(), AnkoComponent<Context>,
         } else{
             toast("Schedule not Available")
         }
-    }
-
-    interface initDataListener{
-        fun initData(game: Match)
-    }
-
-    override fun onAttach(ctx: Context){
-        super.onAttach(ctx)
-        if (ctx is initDataListener){
-            listener = ctx
-        }else{
-            throw RuntimeException(ctx.toString() + "")
-        }
-    }
-
-    override fun onDetach(){
-        super.onDetach()
-        listener = null
     }
 }

@@ -16,21 +16,7 @@ import com.andrew.associate.footballappfinal.teams.TeamsFragment
 import kotlinx.android.synthetic.main.activity_home.*
 import org.jetbrains.anko.startActivity
 
-class HomeActivity : AppCompatActivity(),
-    NextMatchFragment.initDataListener,
-    PrevMatchFragment.initDataListener{
-
-    override fun initData(game: Match) {
-        startActivity<MatchDetailActivity>(
-            "id_event" to game.matchId,
-            "date_event" to game.matchDate,
-            "home_team" to game.homeTeam,
-            "home_score" to game.homeScore,
-            "away_team" to game.awayTeam,
-            "away_score" to game.awayScore,
-            "time_event" to game.matchTime
-        )
-    }
+class HomeActivity : AppCompatActivity(){
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
