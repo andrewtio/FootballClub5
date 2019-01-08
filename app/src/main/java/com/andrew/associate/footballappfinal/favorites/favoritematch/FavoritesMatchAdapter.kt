@@ -63,22 +63,22 @@ class TeamUI : AnkoComponent<ViewGroup> {
 
                     textView {
                         id = R.id.home_team
-                        textSize = 5f
+                        textSize = 12f
                     }.lparams {
                         margin = dip(5)
                     }
 
                     textView {
                         id = R.id.home_score
-                        textSize = 15f
+                        textSize = 25f
                         typeface = Typeface.DEFAULT_BOLD
                     }.lparams {
-                        margin = dip(5)
+                        margin = dip(15)
                     }
 
                     textView {
                         text = "VS"
-                        textSize = 15f
+                        textSize = 25f
                         typeface = Typeface.DEFAULT_BOLD
                         gravity = Gravity.CENTER
                     }.lparams {
@@ -87,15 +87,15 @@ class TeamUI : AnkoComponent<ViewGroup> {
 
                     textView {
                         id = R.id.away_score
-                        textSize = 15f
+                        textSize = 25f
                         typeface = Typeface.DEFAULT_BOLD
                     }.lparams {
-                        margin = dip(5)
+                        margin = dip(15)
                     }
 
                     textView {
                         id = R.id.away_team
-                        textSize = 5f
+                        textSize = 12f
                     }.lparams {
                         margin = dip(5)
                     }

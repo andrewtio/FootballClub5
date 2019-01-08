@@ -3,12 +3,11 @@ package com.andrew.associate.footballappfinal.db
 data class FavoriteMatch(val id: Long?,
                         val idEvent: String?,
                         val dateEvent: String?,
-                        val matchTime: String?,
                         val homeTeam: String?,
                         val awayTeam: String?,
                         val homeScore: String?,
                         val awayScore: String?,
-                        val strFilename: String?) {
+                         val matchTime: String?) {
 
     companion object {
         const val TABLE_FAVORITE_MATCH: String = "TABLE_FAVORITE_MATCH"
