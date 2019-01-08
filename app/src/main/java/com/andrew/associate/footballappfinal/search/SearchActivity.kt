@@ -40,12 +40,11 @@ class SearchActivity: AppCompatActivity(), AnkoComponent<Context>, GameSearchVie
 
         supportActionBar?.hide()
 
-        game_search_view.onActionViewExpanded()
         game_search_view.onQueryTextListener(){
             onQueryTextChange{
-                    it ->
-                presenter.getGameSearch(it)
-                true
+                    match ->
+                presenter.getGameSearch(match)
+                false
             }
         }
 

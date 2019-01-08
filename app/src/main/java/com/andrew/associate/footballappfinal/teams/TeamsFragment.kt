@@ -128,30 +128,17 @@ class TeamsFragment : Fragment(), AnkoComponent<Context>, TeamsView {
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
 
-        menu?.clear()
         inflater?.inflate(R.menu.club_search, menu)
-        val searchArranger = activity?.getSystemService(Context.SEARCH_SERVICE) as SearchManager
         val searchClub = menu?.findItem(R.id.club_search_button)
 
         searchView = searchClub?.actionView as SearchView
-        searchView?.setSearchableInfo(searchArranger.getSearchableInfo(activity?.componentName))
-        searchView?.setIconifiedByDefault(false)
         searchView?.queryHint = "Search Clubs Here..."
         searchView?.onQueryTextListener{
-            onQueryTextChange { it ->
-                presenter.getSearchClubData(it)
-                true
+            onQueryTextChange { club ->
+                presenter.getSearchClubData(club)
+                false
             }
         }
         super.onCreateOptionsMenu(menu, inflater)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        return when (item?.itemId){
-            club_search_button -> {
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
     }
 }
