@@ -53,15 +53,15 @@ class MatchDetailActivity : AppCompatActivity(), MatchDetailView {
 
         val dateFormat = SimpleDateFormat("yyyy-MM-dd")
         dateFormat.timeZone = TimeZone.getTimeZone("UTC")
-        val GMTFormat = SimpleDateFormat("E, dd MMM yyyy")
+        val gmtFormat = SimpleDateFormat("E, dd MMM yyyy")
         val parseDate = dateFormat.parse(dateEvent)
-        val eventDate = GMTFormat.format(parseDate)
+        val eventDate = gmtFormat.format(parseDate)
 
         val timeFormat = SimpleDateFormat("hh:mm:ss")
         timeFormat.timeZone = TimeZone.getTimeZone("UTC")
-        val timeFormatGMT = SimpleDateFormat("HH:mm")
+        val timeFormatGmt = SimpleDateFormat("HH:mm")
         val parseTime = timeFormat.parse(timeEvent)
-        val eventTime = timeFormatGMT.format(parseTime)
+        val eventTime = timeFormatGmt.format(parseTime)
 
         detail_date_tv.text  = eventDate
         detail_time_tv.text = eventTime

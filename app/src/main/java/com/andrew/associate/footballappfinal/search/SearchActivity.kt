@@ -41,7 +41,7 @@ class SearchActivity: AppCompatActivity(), AnkoComponent<Context>, GameSearchVie
         supportActionBar?.hide()
 
         game_search_view.queryHint = "Search Matches Here"
-        game_search_view.onQueryTextListener(){
+        game_search_view.onQueryTextListener {
             onQueryTextChange{
                     match ->
                 presenter.getGameSearch(match)

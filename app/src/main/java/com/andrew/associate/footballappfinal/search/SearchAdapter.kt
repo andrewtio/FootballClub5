@@ -113,9 +113,9 @@ class SearchViewHolder(v: View): RecyclerView.ViewHolder(v){
     fun bind (gameData: MatchItems, listener: (MatchItems) -> Unit){
 
         val formatDate = SimpleDateFormat("yyyy-MM-dd")
-        val formatGMT = SimpleDateFormat("E, dd MMM yyyy")
+        val formatGmt = SimpleDateFormat("E, dd MMM yyyy")
         val dateParse = formatDate.parse(gameData.matchDate)
-        val dateEvent = formatGMT.format(dateParse)
+        val dateEvent = formatGmt.format(dateParse)
 
 //        val timeFormat = SimpleDateFormat("hh:mm:ss")
 //        timeFormat.timeZone = TimeZone.getTimeZone("UTC")

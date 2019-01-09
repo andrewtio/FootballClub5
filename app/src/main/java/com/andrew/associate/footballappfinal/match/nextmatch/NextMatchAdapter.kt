@@ -113,7 +113,6 @@ class TeamUI : AnkoComponent<ViewGroup> {
             }
         }
     }
-
 }
 
 class NextMatchViewHolder(view: View) : RecyclerView.ViewHolder(view){
@@ -134,15 +133,15 @@ class NextMatchViewHolder(view: View) : RecyclerView.ViewHolder(view){
 
         val dateFormat = SimpleDateFormat("yyyy-MM-dd")
         dateFormat.timeZone = TimeZone.getTimeZone("UTC")
-        val GMTFormat = SimpleDateFormat("E, dd MMM yyyy")
+        val gmtFormat = SimpleDateFormat("E, dd MMM yyyy")
         val parseDate = dateFormat.parse(match.matchDate)
-        val eventDate = GMTFormat.format(parseDate)
+        val eventDate = gmtFormat.format(parseDate)
 
         val timeFormat = SimpleDateFormat("hh:mm:ss")
         timeFormat.timeZone = TimeZone.getTimeZone("UTC")
-        val timeFormatGMT = SimpleDateFormat("HH:mm")
+        val timeFormatGmt = SimpleDateFormat("HH:mm")
         val parseTime = timeFormat.parse(match.matchTime)
-        val eventTime = timeFormatGMT.format(parseTime)
+        val eventTime = timeFormatGmt.format(parseTime)
 
         matchDate.text = eventDate
         homeTeam.text = match.homeTeam
