@@ -23,6 +23,7 @@ import org.jetbrains.anko.recyclerview.v7.recyclerView
 import org.jetbrains.anko.sdk27.coroutines.onQueryTextListener
 import org.jetbrains.anko.support.v4.onRefresh
 import org.jetbrains.anko.support.v4.swipeRefreshLayout
+import org.jetbrains.anko.support.v4.toast
 
 class TeamsFragment : Fragment(), AnkoComponent<Context>, TeamsView {
 
@@ -119,11 +120,14 @@ class TeamsFragment : Fragment(), AnkoComponent<Context>, TeamsView {
         progressBar.invisible()
     }
 
-    override fun showTeamList(data: List<Team>) {
+    override fun showTeamList(data: List<Team>?) {
         swipeRefresh.isRefreshing = false
-        teams.clear()
-        teams.addAll(data)
-        adapter.notifyDataSetChanged()
+        data?.let {
+            teams.clear()
+            teams.addAll(data)
+            adapter.notifyDataSetChanged()
+        }
+        ?: toast("Empty Data")
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
