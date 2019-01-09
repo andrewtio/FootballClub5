@@ -70,31 +70,14 @@ class PrevMatchFragment : Fragment(), AnkoComponent<Context>,
         presenter = MatchPresenter(this, request, gson)
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long){
-                when(position) {
-                    0 -> {
-                        leagueName = spinner.selectedItem.toString().replace("English Premier League", "4328")
-                        presenter.getPrevMatchList(leagueName)
-                    }
-                    1 -> {
-                        leagueName = spinner.selectedItem.toString().replace("English League Championship", "4329")
-                        presenter.getPrevMatchList(leagueName)
-                    }
-                    2 -> {
-                        leagueName = spinner.selectedItem.toString().replace("German Bundesliga", "4331")
-                        presenter.getPrevMatchList(leagueName)
-                    }
-                    3 -> {
-                        leagueName = spinner.selectedItem.toString().replace("Italian Serie A", "4332")
-                        presenter.getPrevMatchList(leagueName)
-                    }
-                    4 -> {
-                        leagueName = spinner.selectedItem.toString().replace("French Ligue 1", "4334")
-                        presenter.getPrevMatchList(leagueName)
-                    }
-                    5 -> {
-                        leagueName = spinner.selectedItem.toString().replace("Spanish La Liga", "4335")
-                        presenter.getPrevMatchList(leagueName)
-                    }
+                leagueName = spinner.selectedItem.toString()
+                when(leagueName) {
+                    "English Premier League" -> presenter.getPrevMatchList("4328")
+                    "English League Championship" -> presenter.getPrevMatchList("4329")
+                    "German Bundesliga" -> presenter.getPrevMatchList("4331")
+                    "Italian Serie A" -> presenter.getPrevMatchList("4332")
+                    "French Ligue 1" -> presenter.getPrevMatchList("4334")
+                    "Spanish La Liga" -> presenter.getPrevMatchList("4335")
                 }
             }
 
