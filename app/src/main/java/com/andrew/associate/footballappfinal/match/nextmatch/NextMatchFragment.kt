@@ -19,7 +19,6 @@ import com.andrew.associate.footballappfinal.match.Match
 import com.andrew.associate.footballappfinal.match.MatchPresenter
 import com.andrew.associate.footballappfinal.match.MatchView
 import com.andrew.associate.footballappfinal.match.detail.MatchDetailActivity
-import com.andrew.associate.footballappfinal.match.prevmatch.PrevMatchFragment
 import com.andrew.associate.footballappfinal.utils.MyDateFormat
 import com.andrew.associate.footballappfinal.utils.invisible
 import com.andrew.associate.footballappfinal.utils.visible

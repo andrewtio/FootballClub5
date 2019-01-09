@@ -3,15 +3,12 @@ package com.andrew.associate.footballappfinal.favorites.favoritematch
 import android.graphics.Typeface
 import android.support.v7.widget.RecyclerView
 import android.view.Gravity
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.andrew.associate.footballappfinal.R
 import com.andrew.associate.footballappfinal.db.FavoriteMatch
-import com.squareup.picasso.Picasso
 import org.jetbrains.anko.*
 import java.text.SimpleDateFormat
 import java.util.*
