@@ -2,6 +2,7 @@ package com.andrew.associate.footballappfinal.teams.detail.players.detail
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
@@ -27,7 +28,7 @@ class PlayerDetailActivity : AppCompatActivity() {
 
     private lateinit var id: String
 
-    override fun onCreate(savedInstanceState: Bundle?){
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail_player)
 
@@ -46,84 +47,11 @@ class PlayerDetailActivity : AppCompatActivity() {
 
         supportActionBar?.title = "Player Detail"
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    }
 
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        super.onBackPressed()
+        return super.onOptionsItemSelected(item)
+    }
 
-//        linearLayout(){
-//            lparams(width = matchParent, height = wrapContent)
-//            orientation = LinearLayout.VERTICAL
-//            backgroundColor = Color.WHITE
-//
-//                scrollView{
-//                    isVerticalScrollBarEnabled = false
-//                    relativeLayout {
-//                        lparams(width = matchParent, height = wrapContent)
-//
-//                        linearLayout{
-//                            lparams(width = matchParent, height = wrapContent)
-//                            padding = dip(10)
-//                            orientation = LinearLayout.VERTICAL
-//                            gravity = Gravity.CENTER_HORIZONTAL
-//
-//                            playerFanArt = imageView {}.lparams(height = dip(75))
-//
-//                            playerCutOut = imageView {}.lparams(height = dip(75))
-//
-//                            playerName = textView{
-//                                this.gravity = Gravity.CENTER
-//                                textSize = 20f
-//                            }.lparams{
-//                                topMargin = dip(5)
-//                            }
-//
-//                            playerWeight = textView{
-//                                this.gravity = Gravity.CENTER
-//                            }
-//
-//                            playerHeight = textView{
-//                                this.gravity = Gravity.CENTER
-//                            }
-//
-//                            playerPosition = textView{
-//                                this.gravity = Gravity.CENTER
-//                            }
-//
-//                            playerDescription = textView().lparams{
-//                                topMargin = dip(20)
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-        }
-
-
-//    override fun showLoading() {
-//        progressBar.visible()
-//    }
-//
-//    override fun hideLoading() {
-//        progressBar.invisible()
-//    }
-//
-//    override fun showPlayerDetail(data: List<Player>) {
-//        players = Player(data[0].IdTeam,
-//                    data[0].strPlayer,
-//                    data[0].strCutOut,
-//                    data[0].strFanArt1,
-//                    data[0].strWeight,
-//                    data[0].strHeight,
-//                    data[0].strDescriptionEN,
-//                    data[0].strPosition)
-//        Picasso.get().load(data[0].strFanArt1).into(playerFanArt)
-//        Picasso.get().load(data[0].strCutOut).into(playerCutOut)
-//        playerName.text = data[0].strPlayer
-//        playerWeight.text = data[0].strWeight
-//        playerHeight.text = data[0].strHeight
-//        playerPosition.text = data[0].strPosition
-//        playerDescription.text = data[0].strDescriptionEN
-//    }
-
-//        swipeRefresh.onRefresh{
-//            presenter.getTeamDetail(id)
-//        }
 }

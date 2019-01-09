@@ -5,5 +5,5 @@ import com.andrew.associate.footballappfinal.teams.Team
 interface TeamDetailView {
     fun showLoading()
     fun hideLoading()
-    fun showTeamDetail(data: List<Team>)
+    fun showTeamDetail(data: List<Team>?)
 }

@@ -1,6 +1,5 @@
 package com.andrew.associate.footballappfinal.match.detail
 
-import android.widget.ProgressBar
 
 interface MatchDetailView {
 

@@ -35,6 +35,7 @@ class TeamsPresenter(private val view: TeamsView,
                 , TeamResponse::class.java
             )
 
+            clubName?.filter {clubName == "soccer"}
             view.showTeamList(dataClub.teams)
             view.hideLoading()
         }

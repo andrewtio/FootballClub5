@@ -14,6 +14,7 @@ class SearchPresenter(private val v: GameSearchView,
                       private val context: CoroutineContextProvider = CoroutineContextProvider()
 ) {
 
+
     fun getGameSearch(clubName: String?) {
         GlobalScope.launch(context.main) {
             val dataGame = gson.fromJson(
@@ -21,7 +22,7 @@ class SearchPresenter(private val v: GameSearchView,
                     .doRequest(TheSportDBApi.getSearchGames(clubName)).await()
                 , EventSearchResponse::class.java
             )
-
+            clubName?.filter{clubName == "soccer"}
             v.showGameItems(dataGame.event)
         }
     }
