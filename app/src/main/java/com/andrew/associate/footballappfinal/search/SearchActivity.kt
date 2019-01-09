@@ -82,11 +82,13 @@ class SearchActivity: AppCompatActivity(), AnkoComponent<Context>, GameSearchVie
 
     }
 
-    override fun showGameItems(game: List<MatchItems>) {
+    override fun showGameItems(game: List<MatchItems>?) {
+    game?.let {
         matchItems.clear()
         matchItems.addAll(game)
         adapter.notifyDataSetChanged()
-
+        }
+        ?: toast("Empty Data")
     }
 
     override fun createView(ui: AnkoContext<Context>): View = with(ui){
