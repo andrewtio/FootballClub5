@@ -38,7 +38,7 @@ class PlayersFragment : Fragment(), AnkoComponent<Context>, PlayersView {
         id = team.teamId
 
         adapter = PlayersAdapter(players){
-            context?.startActivity<PlayerDetailActivity>("player_data" to it)
+            context?.startActivity<PlayerDetailActivity>("data_player" to it)
         }
 
         listPlayers.adapter = adapter
