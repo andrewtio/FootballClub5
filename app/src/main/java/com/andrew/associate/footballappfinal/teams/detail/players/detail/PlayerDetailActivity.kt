@@ -34,7 +34,7 @@ class PlayerDetailActivity : AppCompatActivity() {
 //        val intent = intent
 //        id = intent.getStringExtra("id")
 
-        players = intent.getParcelableExtra("player_data")
+        players = intent.getParcelableExtra("data_player")
 
         Picasso.get().load(players.strFanArt1).into(player_fanart)
         Picasso.get().load(players.strCutOut).into(player_cutout)
